@@ -711,13 +711,8 @@
 </section>
 
 <script>
-  const temoignages = [
-    { prenom: "Sophie", resto: "Le Petit Comptoir", message: "Avant Ordo, je découvrais mes pertes en fin de mois. Maintenant je les vois le soir même et j'agis tout de suite. Mon food cost a baissé de 4% en 3 semaines." },
-    { prenom: "Marc-André", resto: "Brasserie du Nord", message: "L'OCR sur les factures fournisseurs m'a sauvé des heures de saisie manuelle. Je prends une photo et c'est importé automatiquement. Simple et efficace." },
-    { prenom: "Karim", resto: "Restaurant Atlas", message: "Ordo IA parle directement, sans détour. Elle m'a identifié une anomalie sur mon stock de viande que j'aurais jamais vue moi-même. Elle a sauvé facilement 200$ cette semaine-là." }
-  ];
-
-  function afficherTemoignages() {
+ const temoignages = [];
+ function afficherTemoignages() {
     const liste = document.getElementById('temoignages-liste');
     if (temoignages.length === 0) {
       liste.innerHTML = '<div style="font-size:13px;color:var(--text-muted);padding:20px 0;">Aucun témoignage pour l\'instant — sois le premier à partager ton expérience.</div>';
