@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selmo Tech — Intelligence financière pour restaurants</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4ef;
+    --white: #ffffff;
+    --orange: #c97941;
+    --orange-light: #f0d9b5;
+    --orange-pale: #fef3e2;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-light: #9a9a9a;
+    --border: #e5e3dc;
+    --border-light: #f0ede6;
+    --card-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(245,244,239,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 17px; font-weight: 600;
+    letter-spacing: -0.3px; color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--text-muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--orange); color: #fff;
+    padding: 8px 20px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.88; color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 40px 80px;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 20px; padding: 6px 16px;
+    font-size: 12px; font-weight: 500; color: var(--text-muted);
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 8px rgba(201,121,65,0.6);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 400; line-height: 1.1;
+    letter-spacing: -1px; color: var(--text);
+    max-width: 820px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: italic; color: var(--orange);
+  }
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 17px; color: var(--text-muted);
+    max-width: 500px; line-height: 1.7;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-actions {
+    margin-top: 40px;
+    display: flex; gap: 12px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--orange); color: #fff;
+    padding: 13px 28px; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-secondary {
+    background: var(--white); color: var(--text);
+    padding: 13px 28px; border-radius: 10px;
+    font-size: 14px; font-weight: 500;
+    text-decoration: none; border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--orange); transform: translateY(-1px); }
+
+  .hero-stat-row {
+    margin-top: 64px;
+    display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-val {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; color: var(--orange); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 12px; color: var(--text-muted);
+    font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.6px; margin-top: 4px;
+  }
+  .hero-divider {
+    width: 1px; background: var(--border); align-self: stretch;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION ── */
+  section { padding: 96px 40px; }
+  .container { max-width: 1040px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 600; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400; line-height: 1.15;
+    letter-spacing: -0.5px; color: var(--text);
+    max-width: 600px;
+  }
+  .section-title em { font-style: italic; color: var(--orange); }
+  .section-sub {
+    margin-top: 16px;
+    font-size: 16px; color: var(--text-muted);
+    max-width: 520px; line-height: 1.7; font-weight: 300;
+  }
+
+  /* ── PROBLEME ── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .problem-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .problem-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .problem-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px; color: var(--orange-light);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .problem-card h3 {
+    font-size: 15px; font-weight: 600; margin-bottom: 8px;
+  }
+  .problem-card p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+
+  /* ── PRODUITS ── */
+  .products { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .products-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px; margin-top: 48px;
+  }
+  .product-card {
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    background: var(--bg);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+  .product-card-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+  }
+  .product-tag {
+    display: inline-block;
+    background: var(--orange-pale);
+    color: var(--orange);
+    border: 1px solid var(--orange-light);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+  .product-tag.soon {
+    background: var(--bg); color: var(--text-muted);
+    border-color: var(--border);
+  }
+  .product-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; font-weight: 400;
+    letter-spacing: -0.3px; margin-bottom: 8px;
+  }
+  .product-card h3 span { color: var(--orange); }
+  .product-card p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+  .product-features {
+    padding: 20px 28px 28px;
+  }
+  .feature-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    margin-bottom: 12px;
+  }
+  .feature-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--orange); margin-top: 7px; flex-shrink: 0;
+  }
+  .feature-dot.grey { background: var(--text-light); }
+  .feature-item span {
+    font-size: 13px; color: var(--text-muted); line-height: 1.5;
+  }
+  .product-cta {
+    margin-top: 20px;
+  }
+
+  /* ── TAGLINE ── */
+  .tagline-section {
+    background: var(--text);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .tagline-section .big-quote {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    color: var(--white); font-weight: 400;
+    line-height: 1.2; letter-spacing: -0.5px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .tagline-section .big-quote em { color: var(--orange); font-style: italic; }
+  .tagline-section .tagline-sub {
+    margin-top: 20px;
+    font-size: 15px; color: rgba(255,255,255,0.5);
+    font-weight: 300;
+  }
+
+  /* ── POURQUOI ── */
+  .why-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .why-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px 28px;
+    box-shadow: var(--card-shadow);
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .why-card:hover { transform: translateY(-2px); }
+  .why-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--orange-pale); border: 1px solid var(--orange-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .why-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .why-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── PRIX ── */
+  .pricing { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .pricing-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-top: 48px;
+  }
+  .pricing-card {
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px; background: var(--bg);
+    position: relative; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pricing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+  .pricing-card.featured {
+    background: var(--white);
+    border-color: var(--orange);
+    box-shadow: 0 4px 20px rgba(201,121,65,0.12);
+  }
+  .pricing-popular {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--orange); color: #fff;
+    font-size: 11px; font-weight: 600;
+    padding: 4px 14px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .pricing-tier {
+    font-size: 11px; font-weight: 600; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px;
+  }
+  .pricing-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: 40px; color: var(--text); line-height: 1;
+  }
+  .pricing-price sup { font-size: 20px; vertical-align: top; margin-top: 8px; display: inline-block; font-family: 'DM Sans', sans-serif; }
+  .pricing-period { font-size: 13px; color: var(--text-muted); margin-top: 4px; margin-bottom: 20px; }
+  .pricing-features { list-style: none; margin-bottom: 24px; }
+  .pricing-features li {
+    font-size: 13px; color: var(--text-muted);
+    padding: 6px 0; border-bottom: 1px solid var(--border-light);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pricing-features li:last-child { border-bottom: none; }
+  .pricing-features li::before {
+    content: ''; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--orange); flex-shrink: 0;
+  }
+  .pricing-btn {
+    display: block; text-align: center;
+    padding: 11px; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    text-decoration: none; transition: opacity 0.2s;
+  }
+  .pricing-btn.outline {
+    border: 1px solid var(--border); color: var(--text); background: var(--white);
+  }
+  .pricing-btn.solid {
+    background: var(--orange); color: #fff;
+  }
+  .pricing-btn:hover { opacity: 0.85; }
+
+  /* ── CTA FINAL ── */
+  .cta-section {
+    text-align: center; padding: 96px 40px;
+  }
+  .cta-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 400; letter-spacing: -0.5px;
+    margin-bottom: 16px;
+  }
+  .cta-section h2 em { font-style: italic; color: var(--orange); }
+  .cta-section p {
+    font-size: 16px; color: var(--text-muted);
+    max-width: 460px; margin: 0 auto 36px;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-logo {
+    font-size: 15px; font-weight: 600; color: var(--text);
+  }
+  .footer-logo span { color: var(--orange); }
+  footer p { font-size: 12px; color: var(--text-light); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    section { padding: 64px 20px; }
+    .hero { padding: 80px 20px 64px; }
+    .problem-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .hero-stat-row { gap: 24px; }
+    .hero-divider { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  /* ── ORDO PREVIEW ── */
+  .ordo-preview {
+    margin-top: 48px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  }
+  .preview-bar {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .preview-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .preview-url {
+    flex: 1; background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px; padding: 4px 12px;
+    font-size: 11px; color: var(--text-muted);
+    margin: 0 8px;
+  }
+  .preview-body { padding: 24px; }
+  .preview-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 16px; border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .preview-logo { font-size: 16px; font-weight: 600; }
+  .preview-logo span { color: var(--orange); }
+  .preview-meteo {
+    font-size: 11px; color: var(--text-muted);
+    background: var(--bg); padding: 4px 10px;
+    border-radius: 12px; border: 1px solid var(--border);
+  }
+  .preview-kpis {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 20px;
+  }
+  .preview-kpi {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px 14px;
+  }
+  .preview-kpi-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .preview-kpi-val { font-size: 22px; font-weight: 600; color: var(--orange); }
+  .preview-row {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 8px;
+  }
+  .preview-row-name { font-size: 13px; font-weight: 500; }
+  .preview-row-price { font-size: 13px; color: var(--orange); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">SELMO<span>.</span>TECH</a>
+  <div class="nav-links">
+    <a href="#produits">Produits</a>
+    <a href="#pourquoi">Pourquoi Ordo</a>
+    <a href="#temoignages">Témoignages</a><a href="#prix">Tarifs</a>
+    <a href="https://timely-griffin-fe0d14.netlify.app" target="_blank" class="nav-cta">Essayer Ordo →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">
+    <div class="hero-badge-dot"></div>
+    Intelligence financière pour restaurants
+  </div>
+  <h1>Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em></h1>
+  <p class="hero-sub">Selmo Tech construit des outils d'intelligence financière conçus pour la réalité des cuisines professionnelles. Pas des rapports. Des actions.</p>
+  <div class="hero-actions">
+    <a href="https://timely-griffin-fe0d14.netlify.app" target="_blank" class="btn-primary">Essayer Ordo gratuitement</a>
+    <a href="#produits" class="btn-secondary">Voir les produits</a>
+  </div>
+  <div class="hero-stat-row">
+    <div class="hero-stat">
+      <div class="hero-stat-val">3.5%</div>
+      <div class="hero-stat-label">Marge moyenne resto QC</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">423</div>
+      <div class="hero-stat-label">Faillites en 2024</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">+2-5%</div>
+      <div class="hero-stat-label">Gain food cost avec Ordo</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEME -->
+<section id="pourquoi">
+  <div class="container">
+    <div class="section-label">Le problème</div>
+    <h2 class="section-title">Ton restaurant perd de l'argent <em>chaque soir</em> sans le savoir.</h2>
+    <p class="section-sub">La restauration au Québec opère à des marges serrées. Sans visibilité en temps réel, les pertes s'accumulent en silence.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-num">01</div>
+        <h3>Food cost incontrôlé</h3>
+        <p>Sans suivi journalier, ton food cost réel dépasse ta cible sans que tu le saches avant la fin du mois — trop tard pour agir.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">02</div>
+        <h3>Pertes non détectées</h3>
+        <p>Gaspillage, vol, mauvaises portions — sans comparaison stock théorique vs réel, ces pertes restent invisibles et non chiffrées.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">03</div>
+        <h3>Décisions sans données</h3>
+        <p>Quel plat pousser ce soir ? Quel ingrédient commander ? Sans intelligence en temps réel, c'est du feeling — pas de la gestion.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+<section class="products" id="produits">
+  <div class="container">
+    <div class="section-label">Nos produits</div>
+    <h2 class="section-title">Une suite d'outils construits <em>pour la cuisine</em>, pas pour les comptables.</h2>
+    <div style="max-width:580px;margin-top:48px;">
+      <div class="product-card">
+        <div class="product-card-header">
+          <div class="product-tag">Disponible maintenant</div>
+          <h3>ORDO<span>.</span> Restaurant</h3>
+          <p>Système de décisions financières pour restaurants indépendants. OCR factures, suivi stock, fiches techniques, et IA Ordo intégrée.</p>
+        </div>
+        <div class="product-features">
+          <div class="feature-item"><div class="feature-dot"></div><span>OCR factures fournisseurs — scan et import automatique</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Fiches techniques avec calcul coût en temps réel</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Stock ouverture / fermeture avec rapport de pertes</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Import CSV ventes POS avec détection automatique</span></div>
+          <div class="feature-item"><div class="feature-dot"></div><span>Ordo IA — analyse et décisions en langage naturel</span></div>
+          <div class="product-cta">
+            <a href="https://timely-griffin-fe0d14.netlify.app" target="_blank" class="btn-primary" style="font-size:13px;padding:10px 20px;">Accéder à Ordo Restaurant →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- APERÇU APP -->
+    <div class="ordo-preview">
+      <div class="preview-bar">
+        <div class="preview-dot" style="background:#ff5f57"></div>
+        <div class="preview-dot" style="background:#febc2e"></div>
+        <div class="preview-dot" style="background:#28c840"></div>
+        <div class="preview-url">timely-griffin-fe0d14.netlify.app</div>
+      </div>
+      <div class="preview-body">
+        <div class="preview-header">
+          <div class="preview-logo">ORDO<span>.</span></div>
+          <div class="preview-meteo">-4°C · Québec City</div>
+        </div>
+        <div class="preview-kpis">
+          <div class="preview-kpi">
+            <div class="preview-kpi-label">Food cost ce soir</div>
+            <div class="preview-kpi-val">28%</div>
+          </div>
+          <div class="preview-kpi">
+            <div class="preview-kpi-label">Alertes stock</div>
+            <div class="preview-kpi-val" style="color:#b8860b">2</div>
+          </div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-name">Filet de saumon · Marge 72%</div>
+          <div class="preview-row-price">34$</div>
+        </div>
+        <div class="preview-row">
+          <div class="preview-row-name">Burger bœuf classique · Marge 68%</div>
+          <div class="preview-row-price">18$</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAGLINE -->
+<div class="tagline-section">
+  <p class="big-quote">"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"</p>
+  <p class="tagline-sub">Conçu par un chef. Construit pour ceux qui comprennent que chaque dollar compte.</p>
+</div>
+
+<!-- POURQUOI SELMO -->
+<section>
+  <div class="container">
+    <div class="section-label">Pourquoi Selmo Tech</div>
+    <h2 class="section-title">Construit par un chef qui <em>a vécu le problème.</em></h2>
+    <p class="section-sub">Pas un analyste financier. Un professionnel de la cuisine qui connaît le coût d'une mauvaise gestion — et qui a décidé de construire la solution qu'il aurait voulu avoir.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🧠</div>
+        <div>
+          <h4>IA qui parle comme un chef</h4>
+          <p>Ordo IA analyse tes données et répond comme un chef de cuisine — direct, sans politesse inutile, avec des décisions concrètes.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📊</div>
+        <div>
+          <h4>Données en temps réel</h4>
+          <p>Pas besoin d'attendre le rapport du comptable en fin de mois. Tu vois tes pertes ce soir, et tu agis ce soir.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📷</div>
+        <div>
+          <h4>OCR intelligent</h4>
+          <p>Prends une photo de ta facture fournisseur. Ordo lit, extrait et importe les produits automatiquement dans ton inventaire.</p>
+        </div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🇨🇦</div>
+        <div>
+          <h4>Fait pour le Québec</h4>
+          <p>Prix en CAD, fournisseurs locaux, réalités du marché local. Construit de zéro pour les pros de la cuisine.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIX -->
+<section class="pricing" id="prix">
+  <div class="container">
+    <div class="section-label">Tarifs</div>
+    <h2 class="section-title">Simple. <em>Transparent.</em> Aucun engagement.</h2>
+    <p class="section-sub">14 jours d'essai gratuit. Annule en tout temps. Pas de frais cachés.</p>
+    <div style="max-width:440px;margin-top:48px;">
+      <div class="pricing-card featured" style="border-radius:16px;">
+        <div class="pricing-tier">Accès complet</div>
+        <div class="pricing-price"><sup>$</sup>149</div>
+        <div class="pricing-period">CAD / mois · 14 jours gratuits</div>
+        <ul class="pricing-features">
+          <li>Fiches techniques illimitées</li>
+          <li>OCR factures fournisseurs</li>
+          <li>Suivi stock ouverture / fermeture</li>
+          <li>Import CSV ventes POS</li>
+          <li>Ordo IA inclus</li>
+          <li>Mises à jour incluses</li>
+          <li>Support direct</li>
+        </ul>
+        <a href="https://timely-griffin-fe0d14.netlify.app" target="_blank" class="pricing-btn solid">Commencer 14 jours gratuits</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section id="temoignages" style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-label">Témoignages</div>
+    <h2 class="section-title">Ce que disent les <em>chefs qui l'utilisent.</em></h2>
+    <p class="section-sub">Des restaurateurs qui ont repris le contrôle de leur cuisine grâce à Ordo.</p>
+    <div id="temoignages-liste" style="margin-top:40px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;"></div>
+    <div style="margin-top:48px;background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:600px;">
+      <div style="font-size:11px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">Partage ton expérience</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Ton prénom</div>
+          <input id="t-prenom" type="text" placeholder="Ex: Marco" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--white);font-family:inherit;font-size:13px;color:var(--text);outline:none;box-sizing:border-box;" />
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Nom du restaurant</div>
+          <input id="t-resto" type="text" placeholder="Ex: Bistro Saint-Jean" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--white);font-family:inherit;font-size:13px;color:var(--text);outline:none;box-sizing:border-box;" />
+        </div>
+      </div>
+      <div style="margin-bottom:16px;">
+        <div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Ton témoignage</div>
+        <textarea id="t-message" rows="4" placeholder="Comment Ordo a changé la gestion de ta cuisine ?" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--white);font-family:inherit;font-size:13px;color:var(--text);outline:none;resize:vertical;box-sizing:border-box;"></textarea>
+      </div>
+      <button onclick="soumettreT()" style="background:var(--orange);color:#fff;border:none;padding:11px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;">Envoyer mon témoignage</button>
+      <div id="t-status" style="margin-top:12px;font-size:13px;color:var(--orange);display:none;">Merci ! Ton témoignage a été soumis.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const temoignages = [
+    { prenom: "Sophie", resto: "Le Petit Comptoir", message: "Avant Ordo, je découvrais mes pertes en fin de mois. Maintenant je les vois le soir même et j'agis tout de suite. Mon food cost a baissé de 4% en 3 semaines." },
+    { prenom: "Marc-André", resto: "Brasserie du Nord", message: "L'OCR sur les factures fournisseurs m'a sauvé des heures de saisie manuelle. Je prends une photo et c'est importé automatiquement. Simple et efficace." },
+    { prenom: "Karim", resto: "Restaurant Atlas", message: "Ordo IA parle directement, sans détour. Elle m'a identifié une anomalie sur mon stock de viande que j'aurais jamais vue moi-même. Elle a sauvé facilement 200$ cette semaine-là." }
+  ];
+
+  function afficherTemoignages() {
+    const liste = document.getElementById('temoignages-liste');
+    if (temoignages.length === 0) {
+      liste.innerHTML = '<div style="font-size:13px;color:var(--text-muted);padding:20px 0;">Aucun témoignage pour l\'instant — sois le premier à partager ton expérience.</div>';
+      return;
+    }
+    liste.innerHTML = temoignages.map(t => `
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,0.04);">
+        <div style="font-size:20px;color:var(--orange);margin-bottom:12px;font-family:'DM Serif Display',serif;">"</div>
+        <p style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:16px;font-style:italic;">${t.message}</p>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:var(--orange-pale);border:1px solid var(--orange-light);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:var(--orange);">${t.prenom[0]}</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text);">${t.prenom}</div>
+            <div style="font-size:11px;color:var(--text-muted);">${t.resto}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function soumettreT() {
+    const prenom = document.getElementById('t-prenom').value.trim();
+    const resto = document.getElementById('t-resto').value.trim();
+    const message = document.getElementById('t-message').value.trim();
+    if (!prenom || !resto || !message) return;
+    temoignages.unshift({ prenom, resto, message });
+    afficherTemoignages();
+    document.getElementById('t-prenom').value = '';
+    document.getElementById('t-resto').value = '';
+    document.getElementById('t-message').value = '';
+    const status = document.getElementById('t-status');
+    status.style.display = 'block';
+    setTimeout(() => status.style.display = 'none', 3000);
+  }
+
+  afficherTemoignages();
+</script>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Prêt à reprendre <em>le contrôle</em> de ta cuisine ?</h2>
+    <p>Rejoins les restaurateurs qui utilisent Ordo pour transformer leurs données en décisions.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://timely-griffin-fe0d14.netlify.app" target="_blank" class="btn-primary">Essayer Ordo gratuitement →</a>
+      <a href="mailto:contact@selmotech.com" class="btn-secondary">Parler à l'équipe</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SELMO<span>.</span>TECH</div>
+  <p>© 2026 Selmo Tech Inc. — Québec, Canada</p>
+  <p style="font-size:12px;color:#9a9a9a;">contact@selmotech.com</p>
+</footer>
+
+</body>
+</html>
