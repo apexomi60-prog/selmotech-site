@@ -290,7 +290,7 @@
 
 <!-- TAGLINE -->
 <div class="tagline-section">
- <p class="big-quote" id="big-tagline" data-fr='"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"' data-en='"Others give you numbers.<br><em>Ordo gives you decisions.</em>"'>"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"</p>
+ <p class="big-quote" id="big-tagline">"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"</p>
   <p class="tagline-sub" data-fr="Conçu par un chef. Construit pour ceux qui comprennent que chaque dollar compte." data-en="Designed by a chef. Built for those who understand every dollar matters.">Conçu par un chef. Construit pour ceux qui comprennent que chaque dollar compte.</p>
 </div>
 
@@ -415,7 +415,6 @@
     lang = lang === 'fr' ? 'en' : 'fr';
     document.getElementById('lang-btn').textContent = lang === 'fr' ? 'EN' : 'FR';
     document.documentElement.lang = lang;
-    document.getElementById('big-tagline').innerHTML = lang === 'en' ? '"Others give you numbers.<br><em>Ordo gives you decisions.</em>"' : '"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"';
     document.querySelector('title').textContent = lang === 'fr'
       ? 'Selmo Tech — Intelligence financière pour restaurants'
       : 'Selmo Tech — Financial Intelligence for Restaurants';
@@ -433,6 +432,11 @@
     document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(el => {
       el.placeholder = el.getAttribute('data-placeholder-' + lang);
     });
+
+    // Big tagline mis à jour en dernier — évite tout écrasement par la boucle générique
+    document.getElementById('big-tagline').innerHTML = lang === 'en'
+      ? '"Others give you numbers.<br><em>Ordo gives you decisions.</em>"'
+      : '"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"';
 
     afficherTemoignages();
   }
