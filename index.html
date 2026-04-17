@@ -179,7 +179,7 @@
     <div class="hero-badge-dot"></div>
     <span data-fr="Intelligence financière pour restaurants" data-en="Financial intelligence for restaurants">Intelligence financière pour restaurants</span>
   </div>
-  <h1 data-fr="Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>" data-en="Others give you numbers.<br><em>Ordo gives you decisions.</em>">Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em></h1>
+  <h1 id="hero-headline">Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em></h1>
   <p class="hero-sub" data-fr="Selmo Tech construit des outils d'intelligence financière conçus pour la réalité des cuisines professionnelles. Pas des rapports. Des actions." data-en="Selmo Tech builds financial intelligence tools designed for the reality of professional kitchens. Not reports. Actions.">Selmo Tech construit des outils d'intelligence financière conçus pour la réalité des cuisines professionnelles. Pas des rapports. Des actions.</p>
   <div class="hero-actions">
     <a href="https://app.selmotech.ca" target="_blank" class="btn-primary" data-fr="Essayer Ordo gratuitement" data-en="Try Ordo for free">Essayer Ordo gratuitement</a>
@@ -433,7 +433,10 @@
       el.placeholder = el.getAttribute('data-placeholder-' + lang);
     });
 
-    // Big tagline mis à jour en dernier — évite tout écrasement par la boucle générique
+    // Éléments avec HTML interne (br, em) — gérés ici uniquement, sans data-fr/data-en
+    document.getElementById('hero-headline').innerHTML = lang === 'en'
+      ? 'Others give you numbers.<br><em>Ordo gives you decisions.</em>'
+      : 'Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>';
     document.getElementById('big-tagline').innerHTML = lang === 'en'
       ? '"Others give you numbers.<br><em>Ordo gives you decisions.</em>"'
       : '"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"';
