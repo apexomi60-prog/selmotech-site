@@ -415,7 +415,7 @@
     lang = lang === 'fr' ? 'en' : 'fr';
     document.getElementById('lang-btn').textContent = lang === 'fr' ? 'EN' : 'FR';
     document.documentElement.lang = lang;
-    document.getElementById('big-tagline').innerHTML = lang === 'fr' ? '"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"' : '"Others give you numbers.<br><em>Ordo gives you decisions.</em>"';
+    document.getElementById('big-tagline').innerHTML = lang === 'en' ? '"Others give you numbers.<br><em>Ordo gives you decisions.</em>"' : '"Les autres donnent des chiffres.<br><em>Ordo donne des décisions.</em>"';
     document.querySelector('title').textContent = lang === 'fr'
       ? 'Selmo Tech — Intelligence financière pour restaurants'
       : 'Selmo Tech — Financial Intelligence for Restaurants';
