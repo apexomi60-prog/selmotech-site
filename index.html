@@ -145,6 +145,46 @@
   .preview-row-price { font-size: 13px; color: var(--orange); font-weight: 600; }
 
   /* RESPONSIVE */
+  /* PRICING 3-PLANS */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; align-items: start; }
+  .pricing-card { border: 1px solid var(--border); border-radius: 16px; padding: 28px; background: var(--bg); position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+  .pricing-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .pricing-card.featured { background: var(--white); border: 2px solid var(--orange); box-shadow: 0 4px 24px rgba(201,121,65,0.15); transform: scale(1.03); }
+  .pricing-card.featured:hover { transform: scale(1.03) translateY(-3px); }
+  .pricing-badge { display: inline-block; background: var(--orange); color: #fff; border-radius: 20px; padding: 3px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
+  .pricing-name { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+  .pricing-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+  .pricing-hook { font-size: 13px; color: var(--text); font-style: italic; margin-bottom: 20px; line-height: 1.5; padding: 12px 14px; background: var(--orange-pale); border-left: 3px solid var(--orange); border-radius: 0 6px 6px 0; }
+  .pricing-features li.restricted { opacity: 0.4; }
+  .pricing-features li.restricted::before { background: var(--border); }
+  .pricing-btn.outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .pricing-btn.outline:hover { border-color: var(--orange); color: var(--orange); opacity: 1; }
+
+  /* CONTACT FORM */
+  .contact-form { max-width: 600px; margin: 0 auto; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 40px; text-align: left; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-input { padding: 11px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--white); font-family: inherit; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.2s; box-sizing: border-box; width: 100%; }
+  .form-input:focus { border-color: var(--orange); }
+  .form-status { margin-top: 12px; font-size: 14px; color: var(--orange); font-weight: 500; display: none; }
+
+  /* FOOTER COLUMNS */
+  .footer-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; padding: 48px 40px; }
+  .footer-brand p { font-size: 13px; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
+  .footer-col-title { font-size: 11px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; }
+  .footer-col a { display: block; font-size: 13px; color: var(--text-muted); text-decoration: none; margin-bottom: 8px; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--orange); }
+  .footer-bottom { border-top: 1px solid var(--border); padding: 16px 40px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .footer-bottom p { font-size: 12px; color: var(--text-light); }
+
+  @media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-card.featured { transform: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-inner { grid-template-columns: 1fr; gap: 24px; padding: 32px 20px; }
+    .footer-bottom { padding: 16px 20px; }
+  }
   @media (max-width: 768px) {
     nav { padding: 0 20px; }
     .nav-links { display: none; }
@@ -339,22 +379,62 @@
     <div class="section-label" data-fr="Tarifs" data-en="Pricing">Tarifs</div>
     <h2 class="section-title" data-fr="Simple. <em>Transparent.</em> Aucun engagement." data-en="Simple. <em>Transparent.</em> No commitment.">Simple. <em>Transparent.</em> Aucun engagement.</h2>
     <p class="section-sub" data-fr="14 jours d'essai gratuit. Annule en tout temps. Pas de frais cachés." data-en="14-day free trial. Cancel anytime. No hidden fees.">14 jours d'essai gratuit. Annule en tout temps. Pas de frais cachés.</p>
-    <div style="margin-top:48px;">
+    <div class="pricing-grid">
+
+      <!-- STARTER -->
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-sub" data-fr="Pour démarrer" data-en="To get started">Pour démarrer</div>
+        <div class="pricing-price"><sup>$</sup>79</div>
+        <div class="pricing-period" data-fr="CAD / mois · 14 jours gratuits" data-en="CAD / month · 14 days free">CAD / mois · 14 jours gratuits</div>
+        <ul class="pricing-features">
+          <li data-fr="Stock journalier ouverture / fermeture" data-en="Daily opening / closing stock">Stock journalier ouverture / fermeture</li>
+          <li data-fr="Jusqu'à 5 ingrédients clés" data-en="Up to 5 key ingredients">Jusqu'à 5 ingrédients clés</li>
+          <li data-fr="5 fiches techniques max" data-en="5 recipe sheets max">5 fiches techniques max</li>
+          <li data-fr="Import CSV ventes" data-en="Sales CSV import">Import CSV ventes</li>
+          <li data-fr="Support par courriel" data-en="Email support">Support par courriel</li>
+          <li class="restricted" data-fr="OCR factures (non inclus)" data-en="Invoice OCR (not included)">OCR factures (non inclus)</li>
+          <li class="restricted" data-fr="Ordo IA (non inclus)" data-en="Ordo AI (not included)">Ordo IA (non inclus)</li>
+        </ul>
+        <a href="https://app.selmotech.ca" target="_blank" class="pricing-btn outline" data-fr="Commencer 14 jours gratuits" data-en="Start 14-day free trial">Commencer 14 jours gratuits</a>
+      </div>
+
+      <!-- PRO (FEATURED) -->
       <div class="pricing-card featured">
-        <div class="pricing-tier" data-fr="Accès complet" data-en="Full access">Accès complet</div>
+        <div class="pricing-badge" data-fr="Le plus populaire" data-en="Most popular">Le plus populaire</div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-sub" data-fr="Pour restaurants sérieux" data-en="For serious restaurants">Pour restaurants sérieux</div>
+        <div class="pricing-hook" data-fr="Détecte vos pertes et augmente votre marge dès le premier mois" data-en="Detects your losses and increases your margin from day one">Détecte vos pertes et augmente votre marge dès le premier mois</div>
         <div class="pricing-price"><sup>$</sup>149</div>
         <div class="pricing-period" data-fr="CAD / mois · 14 jours gratuits" data-en="CAD / month · 14 days free">CAD / mois · 14 jours gratuits</div>
         <ul class="pricing-features">
+          <li data-fr="Ingrédients illimités" data-en="Unlimited ingredients">Ingrédients illimités</li>
           <li data-fr="Fiches techniques illimitées" data-en="Unlimited recipe sheets">Fiches techniques illimitées</li>
+          <li data-fr="Ordo IA — recommandations &amp; détection pertes" data-en="Ordo AI — recommendations &amp; loss detection">Ordo IA — recommandations &amp; détection pertes</li>
           <li data-fr="OCR factures fournisseurs" data-en="Supplier invoice OCR">OCR factures fournisseurs</li>
-          <li data-fr="Suivi stock ouverture / fermeture" data-en="Opening / closing stock tracking">Suivi stock ouverture / fermeture</li>
           <li data-fr="Import CSV ventes POS" data-en="POS sales CSV import">Import CSV ventes POS</li>
-          <li data-fr="Ordo IA inclus" data-en="Ordo AI included">Ordo IA inclus</li>
-          <li data-fr="Mises à jour incluses" data-en="Updates included">Mises à jour incluses</li>
-          <li data-fr="Support direct" data-en="Direct support">Support direct</li>
+          <li data-fr="Support rapide" data-en="Fast support">Support rapide</li>
         </ul>
         <a href="https://app.selmotech.ca" target="_blank" class="pricing-btn solid" data-fr="Commencer 14 jours gratuits" data-en="Start 14-day free trial">Commencer 14 jours gratuits</a>
       </div>
+
+      <!-- ENTERPRISE -->
+      <div class="pricing-card">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-sub" data-fr="Pour groupes et multi-restaurants" data-en="For groups &amp; multi-location">Pour groupes et multi-restaurants</div>
+        <div class="pricing-price"><sup>$</sup>349</div>
+        <div class="pricing-period" data-fr="CAD / mois · 14 jours gratuits" data-en="CAD / month · 14 days free">CAD / mois · 14 jours gratuits</div>
+        <ul class="pricing-features">
+          <li data-fr="Tout du plan Pro" data-en="Everything in Pro">Tout du plan Pro</li>
+          <li data-fr="Jusqu'à 5 restaurants sur un compte" data-en="Up to 5 restaurants on one account">Jusqu'à 5 restaurants sur un compte</li>
+          <li data-fr="Dashboard consolidé multi-sites" data-en="Consolidated multi-site dashboard">Dashboard consolidé multi-sites</li>
+          <li data-fr="Analyse comparative multi-établissements" data-en="Multi-location comparative analysis">Analyse comparative multi-établissements</li>
+          <li data-fr="Support prioritaire" data-en="Priority support">Support prioritaire</li>
+          <li data-fr="Accès API (bientôt)" data-en="API access (coming soon)">Accès API (bientôt)</li>
+        </ul>
+        <a href="mailto:contact@selmotech.com" class="pricing-btn outline" data-fr="Nous contacter" data-en="Contact us">Nous contacter</a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -389,29 +469,68 @@
 </section>
 
 <!-- CTA FINAL -->
-<section class="cta-section">
+<section class="cta-section" id="contact">
   <div class="container">
     <h2 data-fr="Prêt à reprendre <em>le contrôle</em> de ta cuisine ?" data-en="Ready to take back <em>control</em> of your kitchen?">Prêt à reprendre <em>le contrôle</em> de ta cuisine ?</h2>
     <p data-fr="Rejoins les restaurateurs qui utilisent Ordo pour transformer leurs données en décisions." data-en="Join restaurant owners who use Ordo to turn their data into decisions.">Rejoins les restaurateurs qui utilisent Ordo pour transformer leurs données en décisions.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <div style="margin-bottom:40px;">
       <a href="https://app.selmotech.ca" target="_blank" class="btn-primary" data-fr="Essayer Ordo gratuitement →" data-en="Try Ordo for free →">Essayer Ordo gratuitement →</a>
-      <a href="mailto:contact@selmotech.com" class="btn-secondary" data-fr="Parler à l'équipe" data-en="Talk to the team">Parler à l'équipe</a>
+    </div>
+
+    <div class="contact-form">
+      <div class="section-label" style="margin-bottom:20px;" data-fr="Nous contacter" data-en="Contact us">Nous contacter</div>
+      <form id="contact-form" action="https://formspree.io/f/FORMSPREE_ID_PLACEHOLDER" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" data-fr="Prénom" data-en="First name">Prénom</label>
+            <input class="form-input" type="text" name="prenom" required data-placeholder-fr="Ex: Marco" data-placeholder-en="E.g. Marco" placeholder="Ex: Marco" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" data-fr="Courriel" data-en="Email">Courriel</label>
+            <input class="form-input" type="email" name="email" required data-placeholder-fr="vous@restaurant.com" data-placeholder-en="you@restaurant.com" placeholder="vous@restaurant.com" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-fr="Nom du restaurant" data-en="Restaurant name">Nom du restaurant</label>
+          <input class="form-input" type="text" name="restaurant" required data-placeholder-fr="Ex: Bistro Saint-Jean" data-placeholder-en="E.g. Bistro Saint-Jean" placeholder="Ex: Bistro Saint-Jean" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-fr="Message" data-en="Message">Message</label>
+          <textarea class="form-input" name="message" rows="4" required style="resize:vertical;" data-placeholder-fr="Votre message..." data-placeholder-en="Your message..." placeholder="Votre message..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;text-align:center;border:none;cursor:pointer;font-family:inherit;font-size:14px;" data-fr="Envoyer" data-en="Send">Envoyer</button>
+      </form>
+      <div id="contact-status" class="form-status" data-fr="Message envoyé ! On vous répond dans 24h." data-en="Message sent! We'll reply within 24 hours.">Message envoyé ! On vous répond dans 24h.</div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-logo">SELMO<span>.</span>TECH</div>
-  <p>© 2026 Selmo Tech Inc. — Québec, Canada</p>
-  <p style="font-size:12px;color:#9a9a9a;">contact@selmotech.com</p>
-  <p style="margin-top:12px;font-size:12px;">
-    <a href="/legal.html#confidentialite" style="color:var(--orange);text-decoration:none;">Confidentialité</a>
-    <span style="margin:0 8px;color:var(--border);">·</span>
-    <a href="/legal.html#conditions" style="color:var(--orange);text-decoration:none;">Conditions d'utilisation</a>
-    <span style="margin:0 8px;color:var(--border);">·</span>
-    <a href="/legal.html#remboursement" style="color:var(--orange);text-decoration:none;">Remboursement</a>
-  </p>
+<footer style="padding:0;border-top:1px solid var(--border);">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">SELMO<span>.</span>TECH</div>
+      <p data-fr="Intelligence financière pour restaurants indépendants. Québec, Canada." data-en="Financial intelligence for independent restaurants. Quebec, Canada.">Intelligence financière pour restaurants indépendants. Québec, Canada.</p>
+      <p style="margin-top:10px;"><a href="mailto:contact@selmotech.com" style="color:var(--orange);font-size:13px;text-decoration:none;">contact@selmotech.com</a></p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title" data-fr="Tarifs" data-en="Pricing">Tarifs</div>
+      <a href="#prix" data-fr="Starter — 79 $/mois" data-en="Starter — $79/month">Starter — 79 $/mois</a>
+      <a href="#prix" data-fr="Pro — 149 $/mois" data-en="Pro — $149/month">Pro — 149 $/mois</a>
+      <a href="#prix" data-fr="Enterprise — 349 $/mois" data-en="Enterprise — $349/month">Enterprise — 349 $/mois</a>
+      <a href="https://app.selmotech.ca" target="_blank" style="margin-top:8px;color:var(--orange) !important;" data-fr="Essai gratuit 14 jours →" data-en="Free 14-day trial →">Essai gratuit 14 jours →</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title" data-fr="Légal" data-en="Legal">Légal</div>
+      <a href="/legal.html#confidentialite" data-fr="Confidentialité" data-en="Privacy policy">Confidentialité</a>
+      <a href="/legal.html#conditions" data-fr="Conditions d'utilisation" data-en="Terms of use">Conditions d'utilisation</a>
+      <a href="/legal.html#remboursement" data-fr="Remboursement" data-en="Refund policy">Remboursement</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-fr="© 2026 Selmo Tech Inc. — Québec, Canada" data-en="© 2026 Selmo Tech Inc. — Quebec, Canada">© 2026 Selmo Tech Inc. — Québec, Canada</p>
+    <p data-fr="Conçu pour les restaurants qui veulent survivre." data-en="Built for restaurants that want to survive.">Conçu pour les restaurants qui veulent survivre.</p>
+  </div>
 </footer>
 
 <script>
@@ -491,6 +610,41 @@
   }
 
   afficherTemoignages();
+
+  // Contact form via Formspree (fetch, pas de rechargement)
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = contactForm.querySelector('button[type="submit"]');
+      const status = document.getElementById('contact-status');
+      btn.disabled = true;
+      btn.style.opacity = '0.6';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          contactForm.reset();
+          status.textContent = lang === 'fr'
+            ? 'Message envoyé ! On vous répond dans 24h.'
+            : "Message sent! We'll reply within 24 hours.";
+          status.style.display = 'block';
+          setTimeout(() => { status.style.display = 'none'; }, 5000);
+        } else {
+          status.textContent = lang === 'fr' ? 'Erreur — réessayez.' : 'Error — please try again.';
+          status.style.display = 'block';
+        }
+      } catch {
+        status.textContent = lang === 'fr' ? 'Erreur — réessayez.' : 'Error — please try again.';
+        status.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.style.opacity = '';
+    });
+  }
 </script>
 </body>
 </html>
