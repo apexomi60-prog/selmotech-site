@@ -2,377 +2,429 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Documents légaux — Selmo Tech</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Documents légaux d'Ordo</title>
+<meta name="description" content="Politique de confidentialité, conditions d'utilisation et politique de remboursement d'Ordo, par Selmo Tech.">
+<meta name="theme-color" content="#F2F4F2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B8581B'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23FFFDF8' stroke-width='8'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap">
 <style>
-  :root {
-    --bg: #f5f4ef; --white: #ffffff; --orange: #c97941;
-    --orange-light: #f0d9b5; --orange-pale: #fef3e2;
-    --text: #1a1a1a; --text-muted: #6b6b6b; --text-light: #9a9a9a;
-    --border: #e5e3dc;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; line-height: 1.7; }
-  nav { background: var(--white); border-bottom: 1px solid var(--border); padding: 0 40px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
-  .nav-logo { font-size: 17px; font-weight: 600; color: var(--text); text-decoration: none; }
-  .nav-logo span { color: var(--orange); }
-  .nav-links { display: flex; gap: 20px; }
-  .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; padding: 6px 12px; border-radius: 6px; transition: background 0.2s; }
-  .nav-links a:hover { background: var(--bg); color: var(--text); }
-  .nav-links a.active { color: var(--orange); font-weight: 600; }
-  .container { max-width: 800px; margin: 0 auto; padding: 60px 40px; }
-  .doc { display: none; }
-  .doc.active { display: block; }
-  .doc-header { margin-bottom: 40px; padding-bottom: 24px; border-bottom: 2px solid var(--orange-light); }
-  .doc-badge { display: inline-block; background: var(--orange-pale); color: var(--orange); border: 1px solid var(--orange-light); border-radius: 6px; padding: 3px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 16px; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: 36px; font-weight: 400; color: var(--text); margin-bottom: 12px; line-height: 1.2; }
-  .doc-meta { font-size: 13px; color: var(--text-muted); }
-  h2 { font-size: 18px; font-weight: 600; color: var(--text); margin: 36px 0 12px; padding-top: 36px; border-top: 1px solid var(--border); }
-  h2:first-of-type { border-top: none; padding-top: 0; }
-  h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 20px 0 8px; }
-  p { margin-bottom: 14px; color: var(--text-muted); }
-  ul, ol { margin: 0 0 14px 24px; color: var(--text-muted); }
-  li { margin-bottom: 6px; }
-  .highlight-box { background: var(--orange-pale); border: 1px solid var(--orange-light); border-left: 4px solid var(--orange); border-radius: 8px; padding: 16px 20px; margin: 20px 0; }
-  .highlight-box p { margin: 0; color: var(--text); font-size: 14px; }
-  .contact-box { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 24px 0; }
-  .contact-box p { margin: 4px 0; color: var(--text-muted); font-size: 14px; }
-  .contact-box strong { color: var(--text); }
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
-  th { background: var(--bg); padding: 10px 14px; text-align: left; font-weight: 600; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
-  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top; }
-  footer { border-top: 1px solid var(--border); padding: 32px 40px; text-align: center; font-size: 12px; color: var(--text-light); margin-top: 60px; }
-  footer a { color: var(--orange); text-decoration: none; }
-  @media (max-width: 768px) {
-    .container { padding: 40px 20px; }
-    nav { padding: 0 20px; }
-    .nav-links { gap: 4px; }
-    .nav-links a { font-size: 12px; padding: 6px 8px; }
-    h1 { font-size: 28px; }
-  }
+/* Mise en page : une colonne de lecture de 760 px, onglets en tête pour passer d'un document à l'autre. */
+:root {
+  --carrelage: #F2F4F2;
+  --inox: #E4E8E6;
+  --ligne: #D0D7D4;
+  --ligne-forte: #9AA4A1;
+  --encre: #1B2226;
+  --encre-2: #48535A;
+  --encre-3: #5F6A70;
+  --papier: #FFFDF8;
+  --cuivre: #B8581B;
+  --cuivre-texte: #9A4813;
+  --cuivre-clair: #E08A4F;
+  --ardoise: #1F2B2A;
+  --ardoise-2: #2A3836;
+  --sur-ardoise: #EEF2F0;
+  --sur-ardoise-2: #A9B5B2;
+  --f-titre: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-texte: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 130px; }
+body { margin: 0; background: var(--carrelage); color: var(--encre); font-family: var(--f-texte); font-size: 16.5px; line-height: 1.65; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--carrelage); }
+a { color: var(--cuivre-texte); }
+:focus-visible { outline: 3px solid var(--cuivre); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 840px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+@media (min-width: 720px) { .wrap { padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); } }
+
+.entete { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(242, 244, 242, 0.95); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--ligne); }
+.entete-haut { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+.marque { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; color: var(--encre); }
+.marque-nom { font: 850 26px/1 var(--f-titre); font-stretch: 72%; }
+.marque-nom span { color: var(--cuivre); }
+.marque-par { font-size: 13px; color: var(--encre-3); }
+.retour { font-size: 15px; font-weight: 500; color: var(--encre); text-decoration: none; }
+.retour:hover { text-decoration: underline; text-underline-offset: 4px; }
+.onglets { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 10px; }
+.onglets a { flex: none; font-size: 15px; font-weight: 600; color: var(--encre-2); text-decoration: none; padding: 8px 14px; border-radius: 8px; }
+.onglets a:hover { background: var(--inox); color: var(--encre); }
+.onglets a[aria-current="page"] { background: var(--encre); color: var(--carrelage); }
+
+.doc { padding-block: 48px 72px; }
+.doc[hidden] { display: none; }
+.doc-tete { padding-bottom: 24px; border-bottom: 2px solid var(--encre); margin-bottom: 8px; }
+.doc-cadre { font-size: 14px; font-weight: 600; color: var(--cuivre-texte); }
+h1 { margin: 8px 0 10px; font: 850 clamp(34px, 5vw, 48px)/1.05 var(--f-titre); font-stretch: 72%; text-wrap: balance; }
+.doc-meta { margin: 0; font-size: 14.5px; color: var(--encre-3); }
+h2 { margin: 40px 0 12px; font-size: 21px; font-weight: 750; line-height: 1.3; }
+h3 { margin: 22px 0 8px; font-size: 17px; font-weight: 700; }
+p { margin: 0 0 14px; color: var(--encre-2); }
+ul, ol { margin: 0 0 14px; padding-left: 22px; color: var(--encre-2); }
+li { margin-bottom: 6px; }
+strong { color: var(--encre); }
+.resume { margin: 28px 0 8px; background: var(--papier); border: 1px solid var(--ligne); border-left: 4px solid var(--cuivre); border-radius: 8px; padding: 16px 20px; }
+.resume p { margin: 0; color: var(--encre); }
+.coordonnees { margin: 18px 0; background: var(--papier); border: 1px solid var(--ligne); border-radius: 10px; padding: 18px 20px; }
+.coordonnees p { margin: 2px 0; }
+.courriel { user-select: all; color: var(--encre); font-weight: 600; }
+.table-zone { overflow-x: auto; margin: 16px 0; }
+table { width: 100%; min-width: 480px; border-collapse: collapse; font-size: 15px; }
+th { text-align: left; font-size: 14px; font-weight: 700; color: var(--encre); padding: 10px 12px; border-bottom: 2px solid var(--encre); }
+td { padding: 10px 12px; border-bottom: 1px solid var(--ligne); color: var(--encre-2); vertical-align: top; }
+
+.pied { background: var(--ardoise); color: var(--sur-ardoise-2); padding-block: 36px; font-size: 14.5px; }
+.pied p { margin: 0 0 8px; color: var(--sur-ardoise-2); }
+.pied a { color: var(--sur-ardoise); }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="https://selmotech.ca" class="nav-logo">SELMO<span>.</span>TECH</a>
-  <div class="nav-links">
-    <a href="#" class="active" onclick="showDoc('confidentialite', this)">Confidentialité</a>
-    <a href="#" onclick="showDoc('conditions', this)">Conditions</a>
-    <a href="#" onclick="showDoc('remboursement', this)">Remboursement</a>
+<header class="entete">
+  <div class="wrap">
+    <div class="entete-haut">
+      <a class="marque" href="/"><span class="marque-nom">Ordo<span>.</span></span><span class="marque-par">par Selmo Tech</span></a>
+      <a class="retour" href="/">Retour au site</a>
+    </div>
+    <nav class="onglets" aria-label="Documents légaux">
+      <a href="#confidentialite" data-doc="confidentialite">Confidentialité</a>
+      <a href="#conditions" data-doc="conditions">Conditions d'utilisation</a>
+      <a href="#remboursement" data-doc="remboursement">Remboursement</a>
+    </nav>
   </div>
-</nav>
+</header>
+
+<main>
 
 <!-- POLITIQUE DE CONFIDENTIALITÉ -->
-<div id="confidentialite" class="doc active">
-<div class="container">
-  <div class="doc-header">
-    <div class="doc-badge">Loi 25 · LPRPDE</div>
+<article class="doc wrap" id="confidentialite">
+  <div class="doc-tete">
+    <p class="doc-cadre">Loi 25 (Québec) et LPRPDE (Canada)</p>
     <h1>Politique de confidentialité</h1>
-    <p class="doc-meta">Selmo Tech Inc. · Dernière mise à jour : 17 avril 2026 · Version 1.0</p>
+    <p class="doc-meta">Selmo Tech. Dernière mise à jour : 26 octobre 2026, version 1.2.</p>
   </div>
 
-  <div class="highlight-box">
-    <p><strong>En résumé :</strong> Selmo Tech collecte uniquement les données nécessaires au fonctionnement d'Ordo. Nous ne vendons jamais vos données. Vous avez le droit d'accéder, corriger et supprimer vos informations en tout temps.</p>
+  <div class="resume">
+    <p><strong>En résumé :</strong> Selmo Tech collecte uniquement les données nécessaires au fonctionnement d'Ordo. Nous ne vendons jamais vos données. Vous pouvez accéder à vos informations, les corriger ou les faire supprimer en tout temps.</p>
   </div>
 
-  <h2>1. Identité du responsable du traitement</h2>
-  <p>Selmo Tech Inc. (ci-après « Selmo Tech », « nous », « notre ») est responsable du traitement de vos données personnelles. Conformément à la <em>Loi modernisant des dispositions législatives en matière de protection des renseignements personnels</em> (Loi 25, Québec) et à la <em>Loi sur la protection des renseignements personnels et les documents électroniques</em> (LPRPDE, Canada), nous désignons un responsable de la protection des renseignements personnels.</p>
-  <div class="contact-box">
+  <h2>1. Responsable du traitement</h2>
+  <p>Selmo Tech (ci-après « Selmo Tech », « nous ») est responsable du traitement de vos renseignements personnels. Conformément à la <em>Loi modernisant des dispositions législatives en matière de protection des renseignements personnels</em> (Loi 25, Québec) et à la <em>Loi sur la protection des renseignements personnels et les documents électroniques</em> (LPRPDE, Canada), nous désignons un responsable de la protection des renseignements personnels.</p>
+  <div class="coordonnees">
     <p><strong>Responsable de la protection des renseignements personnels</strong></p>
-    <p>Selmo Tech Inc.</p>
+    <p>Titre : fondateur de Selmo Tech</p>
     <p>Québec, Canada</p>
-    <p>Courriel : <strong>privacy@selmotech.com</strong></p>
-    <p>Site : <strong>selmotech.ca</strong></p>
+    <p>Courriel : <span class="courriel">contact@selmotech.ca</span></p>
   </div>
 
   <h2>2. Données collectées</h2>
-  <h3>2.1 Données fournies directement</h3>
+  <h3>2.1 Données que vous nous fournissez</h3>
   <ul>
-    <li>Adresse courriel et mot de passe (haché, non lisible)</li>
+    <li>Adresse courriel et mot de passe (stocké sous forme hachée, illisible)</li>
     <li>Nom du restaurant</li>
-    <li>Préférence de langue (français ou anglais)</li>
+    <li>Si vous vous connectez avec Google : votre nom et votre adresse courriel Google</li>
+    <li>Si vous nous écrivez par le formulaire du site : prénom, courriel, nom du restaurant et message</li>
   </ul>
 
   <h3>2.2 Données opérationnelles (votre activité dans Ordo)</h3>
   <ul>
-    <li>Inventaire et ingrédients clés (noms, quantités, prix)</li>
+    <li>Ingrédients, inventaire et pertes (noms, quantités, prix, raisons)</li>
     <li>Fiches techniques et recettes</li>
-    <li>Données de stock journalier (ouverture/fermeture)</li>
-    <li>Données de ventes importées (CSV)</li>
-    <li>Factures fournisseurs analysées par OCR</li>
-    <li>Historique des actions et anomalies Ordo IA</li>
+    <li>Données de ventes (fichiers CSV, photos de rapports de caisse, saisies)</li>
+    <li>Factures fournisseurs lues par reconnaissance de texte (OCR)</li>
+    <li>Questions posées à Ordo IA et réponses obtenues</li>
+    <li>Notes de mémoire d'Ordo IA : constats sur les habitudes de votre restaurant (pertes, fournisseurs, marges) tirés de vos échanges, que vous pouvez faire effacer sur demande</li>
   </ul>
 
   <h3>2.3 Données techniques collectées automatiquement</h3>
   <ul>
-    <li>Adresse IP et type de navigateur (logs de serveur)</li>
+    <li>Adresse IP et type de navigateur (journaux de serveur)</li>
     <li>Date et heure des connexions</li>
-    <li>Logs d'erreurs techniques</li>
+    <li>Journaux d'erreurs techniques</li>
   </ul>
-
-  <p>Nous ne collectons <strong>aucune donnée de paiement</strong> directement — les transactions sont traitées par Stripe (processeur de paiement certifié PCI DSS).</p>
+  <p>Nous ne collectons <strong>aucune donnée de paiement</strong> directement : les paiements sont traités par Stripe, un processeur certifié PCI DSS.</p>
 
   <h2>3. Finalités du traitement</h2>
-  <table>
-    <tr><th>Finalité</th><th>Base légale</th></tr>
-    <tr><td>Fournir et améliorer le service Ordo</td><td>Exécution du contrat</td></tr>
-    <tr><td>Authentification et sécurité du compte</td><td>Exécution du contrat</td></tr>
-    <tr><td>Analyse IA des données de votre restaurant</td><td>Exécution du contrat</td></tr>
-    <tr><td>Facturation et gestion des abonnements</td><td>Obligation légale / Contrat</td></tr>
-    <tr><td>Amélioration du service (données anonymisées)</td><td>Intérêt légitime</td></tr>
-    <tr><td>Communications de service (pannes, mises à jour)</td><td>Intérêt légitime</td></tr>
-    <tr><td>Communications marketing (avec consentement)</td><td>Consentement</td></tr>
-  </table>
+  <div class="table-zone">
+    <table>
+      <tr><th>Finalité</th><th>Base légale</th></tr>
+      <tr><td>Fournir et améliorer le service Ordo</td><td>Exécution du contrat</td></tr>
+      <tr><td>Authentification et sécurité du compte</td><td>Exécution du contrat</td></tr>
+      <tr><td>Analyse des données de votre restaurant par Ordo IA</td><td>Exécution du contrat</td></tr>
+      <tr><td>Facturation et gestion des abonnements</td><td>Obligation légale et contrat</td></tr>
+      <tr><td>Amélioration du service (données anonymisées)</td><td>Intérêt légitime</td></tr>
+      <tr><td>Communications de service (pannes, mises à jour)</td><td>Intérêt légitime</td></tr>
+      <tr><td>Réponse à vos messages envoyés par le formulaire du site</td><td>Consentement</td></tr>
+      <tr><td>Communications marketing</td><td>Consentement</td></tr>
+    </table>
+  </div>
 
-  <h2>4. Partage des données</h2>
-  <p>Nous ne vendons jamais vos données personnelles. Vos données peuvent être partagées uniquement avec :</p>
-  <ul>
-    <li><strong>Anthropic (API Claude)</strong> — les données de votre inventaire/stock sont envoyées pour générer les analyses Ordo IA. Anthropic ne conserve pas ces données au-delà de la durée de traitement.</li>
-    <li><strong>Supabase (PostgreSQL)</strong> — hébergement de la base de données, serveurs en région Canada (ca-central-1).</li>
-    <li><strong>Railway</strong> — hébergement du serveur backend, région US East.</li>
-    <li><strong>Vercel</strong> — hébergement du frontend.</li>
-    <li><strong>Stripe</strong> — traitement des paiements (données de carte non accessibles par Selmo Tech).</li>
-  </ul>
-  <p>Tous nos sous-traitants sont soumis à des obligations contractuelles de confidentialité conformes aux lois applicables.</p>
+  <h2>4. Partage des données et sous-traitants</h2>
+  <p>Nous ne vendons jamais vos renseignements personnels. Ils peuvent être communiqués uniquement aux sous-traitants suivants, pour les besoins du service :</p>
+  <div class="table-zone">
+    <table>
+      <tr><th>Sous-traitant</th><th>Rôle</th><th>Lieu de traitement</th></tr>
+      <tr><td>Supabase</td><td>Base de données et authentification</td><td>Canada (région ca-central-1)</td></tr>
+      <tr><td>Render</td><td>Hébergement du serveur de l'application</td><td>À l'extérieur du Canada</td></tr>
+      <tr><td>Anthropic (API Claude)</td><td>Analyses d'Ordo IA et lecture des factures</td><td>États-Unis</td></tr>
+      <tr><td>Vercel</td><td>Hébergement du site et de l'interface de l'application</td><td>Réseau mondial</td></tr>
+      <tr><td>Stripe</td><td>Traitement des paiements</td><td>Canada et États-Unis</td></tr>
+      <tr><td>Formspree</td><td>Réception des messages du formulaire du site</td><td>États-Unis</td></tr>
+      <tr><td>Cloudflare</td><td>Noms de domaine et redirection des courriels</td><td>Réseau mondial</td></tr>
+      <tr><td>Google</td><td>Connexion avec un compte Google, si vous choisissez cette option</td><td>États-Unis</td></tr>
+    </table>
+  </div>
+  <p>Ces sous-traitants sont soumis à des obligations contractuelles de confidentialité et de sécurité.</p>
 
   <h2>5. Conservation des données</h2>
-  <table>
-    <tr><th>Type de données</th><th>Durée de conservation</th></tr>
-    <tr><td>Données de compte actif</td><td>Durée de l'abonnement + 12 mois</td></tr>
-    <tr><td>Données opérationnelles (stocks, ventes)</td><td>Durée de l'abonnement + 12 mois</td></tr>
-    <tr><td>Logs techniques</td><td>90 jours</td></tr>
-    <tr><td>Données de facturation</td><td>7 ans (obligation fiscale)</td></tr>
-    <tr><td>Compte supprimé sur demande</td><td>Suppression dans les 30 jours</td></tr>
-  </table>
+  <div class="table-zone">
+    <table>
+      <tr><th>Type de données</th><th>Durée de conservation</th></tr>
+      <tr><td>Données de compte actif</td><td>Durée de l'abonnement, plus 12 mois</td></tr>
+      <tr><td>Données opérationnelles (stocks, ventes, recettes)</td><td>Durée de l'abonnement, plus 12 mois</td></tr>
+      <tr><td>Journaux techniques</td><td>90 jours</td></tr>
+      <tr><td>Données de facturation</td><td>7 ans (obligation fiscale)</td></tr>
+      <tr><td>Compte supprimé à votre demande</td><td>Suppression dans les 30 jours</td></tr>
+    </table>
+  </div>
 
-  <h2>6. Vos droits (Loi 25 et LPRPDE)</h2>
-  <p>Conformément à la Loi 25 (Québec) et à la LPRPDE (Canada), vous disposez des droits suivants :</p>
+  <h2>6. Vos droits</h2>
+  <p>En vertu de la Loi 25 (Québec) et de la LPRPDE (Canada), vous avez le droit :</p>
   <ul>
-    <li><strong>Droit d'accès</strong> — obtenir une copie de vos données personnelles</li>
-    <li><strong>Droit de rectification</strong> — corriger des données inexactes</li>
-    <li><strong>Droit à l'effacement</strong> — supprimer vos données (sous réserve des obligations légales)</li>
-    <li><strong>Droit à la portabilité</strong> — recevoir vos données dans un format structuré</li>
-    <li><strong>Droit d'opposition</strong> — vous opposer à certains traitements</li>
-    <li><strong>Droit de retirer votre consentement</strong> — à tout moment pour les traitements basés sur le consentement</li>
+    <li><strong>d'accès</strong> : obtenir une copie de vos renseignements personnels;</li>
+    <li><strong>de rectification</strong> : corriger des renseignements inexacts;</li>
+    <li><strong>à l'effacement</strong> : faire supprimer vos renseignements, sous réserve des obligations légales;</li>
+    <li><strong>à la portabilité</strong> : recevoir vos renseignements dans un format structuré;</li>
+    <li><strong>de retirer votre consentement</strong> en tout temps, pour les traitements qui en dépendent.</li>
   </ul>
-  <p>Pour exercer vos droits, contactez-nous à <strong>privacy@selmotech.com</strong>. Nous répondons dans un délai de 30 jours.</p>
+  <p>Pour exercer ces droits, écrivez à <span class="courriel">contact@selmotech.ca</span>. Nous répondons dans un délai de 30 jours.</p>
 
   <h2>7. Sécurité</h2>
-  <p>Nous mettons en œuvre des mesures de sécurité appropriées :</p>
   <ul>
-    <li>Mots de passe hachés avec sel (SHA-256)</li>
-    <li>Connexions chiffrées (TLS 1.3)</li>
-    <li>Authentification par token JWT</li>
-    <li>Isolation des données par restaurant (multi-tenant)</li>
+    <li>Mots de passe hachés par notre fournisseur d'authentification (Supabase Auth, algorithme bcrypt)</li>
+    <li>Connexions chiffrées (HTTPS/TLS)</li>
+    <li>Authentification par jeton (JWT)</li>
+    <li>Isolation des données par restaurant grâce à des règles de sécurité au niveau de chaque ligne de la base de données</li>
     <li>Accès restreint aux données de production</li>
   </ul>
 
-  <h2>8. Transfert hors Québec/Canada</h2>
-  <p>Certains de nos sous-traitants (Railway, Anthropic) opèrent aux États-Unis. Conformément à la Loi 25, nous effectuons une évaluation des facteurs relatifs à la vie privée (EFVP) avant tout transfert et nous assurons que les protections équivalentes sont en place.</p>
+  <h2>8. Communication de renseignements à l'extérieur du Québec</h2>
+  <p>Certains sous-traitants (Render, Anthropic, Vercel, Stripe, Formspree, Cloudflare, Google) traitent des données à l'extérieur du Québec, notamment aux États-Unis. Conformément à l'article 17 de la Loi sur la protection des renseignements personnels dans le secteur privé, nous réalisons une évaluation des facteurs relatifs à la vie privée (EFVP) avant toute communication à l'extérieur du Québec et nous nous assurons, par entente écrite, que les renseignements bénéficient d'une protection adéquate.</p>
 
-  <h2>9. Témoins (cookies)</h2>
-  <p>Ordo utilise uniquement des données stockées localement dans votre navigateur (localStorage) pour maintenir votre session et vos préférences de langue. Aucun cookie tiers ou publicitaire n'est utilisé.</p>
+  <h2>9. Témoins (cookies) et stockage local</h2>
+  <p>L'application Ordo utilise le stockage local de votre navigateur pour maintenir votre session et vos préférences. Le site selmotech.ca y garde seulement votre choix de langue. Aucun témoin publicitaire ni de suivi tiers n'est utilisé. Le site charge ses polices de caractères depuis Google Fonts.</p>
 
   <h2>10. Modifications</h2>
-  <p>Toute modification substantielle de cette politique sera communiquée par courriel 30 jours avant son entrée en vigueur.</p>
+  <p>Toute modification importante de cette politique vous sera communiquée par courriel 30 jours avant son entrée en vigueur.</p>
 
   <h2>11. Plainte</h2>
-  <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez déposer une plainte auprès de la Commission d'accès à l'information du Québec (CAI) : <strong>cai.gouv.qc.ca</strong> ou du Commissariat à la protection de la vie privée du Canada : <strong>priv.gc.ca</strong>.</p>
-</div>
-</div>
+  <p>Si vous estimez que vos droits ne sont pas respectés, vous pouvez porter plainte auprès de la Commission d'accès à l'information du Québec (cai.gouv.qc.ca) ou du Commissariat à la protection de la vie privée du Canada (priv.gc.ca).</p>
+</article>
 
 <!-- CONDITIONS D'UTILISATION -->
-<div id="conditions" class="doc">
-<div class="container">
-  <div class="doc-header">
-    <div class="doc-badge">LPC Québec · Code civil</div>
+<article class="doc wrap" id="conditions" hidden>
+  <div class="doc-tete">
+    <p class="doc-cadre">Loi sur la protection du consommateur et Code civil du Québec</p>
     <h1>Conditions d'utilisation</h1>
-    <p class="doc-meta">Selmo Tech Inc. · Dernière mise à jour : 17 avril 2026 · Version 1.0</p>
+    <p class="doc-meta">Selmo Tech. Dernière mise à jour : 26 octobre 2026, version 1.2.</p>
   </div>
 
-  <div class="highlight-box">
-    <p><strong>Important :</strong> En créant un compte Ordo, vous acceptez les présentes conditions. Lisez-les attentivement. En cas de désaccord, ne créez pas de compte.</p>
+  <div class="resume">
+    <p><strong>Important :</strong> en créant un compte Ordo, vous acceptez les présentes conditions. Lisez-les attentivement. Si vous n'êtes pas d'accord, ne créez pas de compte.</p>
   </div>
 
   <h2>1. Parties au contrat</h2>
-  <p>Les présentes conditions constituent un contrat entre <strong>Selmo Tech Inc.</strong>, société ayant son siège au Québec, Canada (« Selmo Tech ») et vous, l'utilisateur (« Client »). Ce contrat est régi par les lois de la province de Québec et les lois fédérales du Canada applicables.</p>
+  <p>Les présentes conditions constituent un contrat entre <strong>Selmo Tech</strong>, entreprise établie au Québec, Canada (« Selmo Tech »), et vous, l'utilisateur (« Client »). Ce contrat est régi par les lois du Québec et les lois fédérales du Canada qui s'y appliquent.</p>
 
   <h2>2. Description du service</h2>
-  <p>Ordo est un logiciel de gestion financière pour restaurants accessible via navigateur web à l'adresse <strong>app.selmotech.ca</strong>. Le service comprend :</p>
+  <p>Ordo est un logiciel de gestion financière pour restaurants, accessible par navigateur à l'adresse <strong>app.selmotech.ca</strong>. Le service comprend :</p>
   <ul>
-    <li>Gestion d'inventaire et d'ingrédients clés</li>
-    <li>Fiches techniques avec calcul de coût</li>
-    <li>Suivi de stock journalier (ouverture/fermeture)</li>
-    <li>Analyse OCR de factures fournisseurs</li>
-    <li>Import de données de ventes (CSV)</li>
-    <li>Ordo IA — assistant d'analyse financière propulsé par intelligence artificielle</li>
+    <li>la gestion des ingrédients, de l'inventaire et des pertes;</li>
+    <li>des fiches techniques avec calcul de coût;</li>
+    <li>le suivi du stock d'ouverture et de fermeture;</li>
+    <li>la lecture de factures fournisseurs par reconnaissance de texte (OCR);</li>
+    <li>l'import de données de ventes (CSV, photo de rapport de caisse ou saisie);</li>
+    <li>Ordo IA, un assistant d'analyse propulsé par l'intelligence artificielle.</li>
   </ul>
+  <p>Les fonctionnalités incluses varient selon le plan choisi (voir l'article 4).</p>
 
   <h2>3. Création de compte et période d'essai</h2>
-  <p>Pour utiliser Ordo, vous devez créer un compte avec une adresse courriel valide et un mot de passe d'au moins 6 caractères.</p>
-  <p>Tout nouveau compte bénéficie d'un <strong>essai gratuit de 14 jours</strong>, sans obligation d'achat et sans carte de crédit requise à l'inscription. À l'expiration de la période d'essai, l'accès est suspendu jusqu'à souscription d'un abonnement.</p>
+  <p>Pour utiliser Ordo, vous devez créer un compte avec une adresse courriel valide et un mot de passe d'au moins 8 caractères, ou vous connecter avec un compte Google.</p>
+  <p>Tout nouveau compte bénéficie d'un <strong>essai gratuit de 14 jours</strong>, sans obligation d'achat et sans carte de crédit requise à l'inscription. À la fin de l'essai, Selmo Tech peut suspendre l'accès jusqu'à la souscription d'un abonnement. Un restaurant pilote peut bénéficier d'une période d'essai plus longue, convenue par écrit.</p>
 
-  <h2>4. Abonnement et tarification</h2>
-  <table>
-    <tr><th>Plan</th><th>Prix</th><th>Facturation</th></tr>
-    <tr><td>Ordo Restaurant — Accès complet</td><td>149 $ CAD / mois</td><td>Mensuelle, récurrente</td></tr>
-  </table>
-  <p>Tous les prix sont en dollars canadiens (CAD) et excluent les taxes applicables (TPS/TVQ). Les taxes seront calculées et affichées au moment du paiement selon votre province de résidence.</p>
-  <p>Le paiement est traité de manière sécurisée par <strong>Stripe Inc.</strong> Selmo Tech ne stocke aucune information de carte de crédit.</p>
+  <h2>4. Abonnements et tarifs</h2>
+  <div class="table-zone">
+    <table>
+      <tr><th>Plan</th><th>Prix</th><th>Facturation</th></tr>
+      <tr><td>Starter</td><td>40 $ CA par mois</td><td>Mensuelle, récurrente</td></tr>
+      <tr><td>Pro</td><td>129 $ CA par mois</td><td>Mensuelle, récurrente</td></tr>
+      <tr><td>Entreprise</td><td>349 $ CA par mois</td><td>Mensuelle, récurrente</td></tr>
+    </table>
+  </div>
+  <p>Les fonctionnalités de chaque plan sont décrites sur <strong>selmotech.ca</strong>. Les prix sont en dollars canadiens et excluent les taxes applicables (TPS et TVQ), qui sont calculées et affichées au moment du paiement, le cas échéant.</p>
+  <p>Le paiement est traité de façon sécurisée par <strong>Stripe</strong>. Selmo Tech ne conserve aucune information de carte de crédit.</p>
 
   <h2>5. Renouvellement et annulation</h2>
-  <p>L'abonnement se renouvelle automatiquement chaque mois à la date anniversaire. Vous pouvez annuler à tout moment depuis votre espace client ou en nous contactant à <strong>support@selmotech.com</strong>. L'annulation prend effet à la fin de la période de facturation en cours. Vous conservez l'accès jusqu'à cette date.</p>
+  <p>L'abonnement se renouvelle automatiquement chaque mois à la date anniversaire. Vous pouvez l'annuler en tout temps depuis la page Abonnement de l'application ou en écrivant à <span class="courriel">contact@selmotech.ca</span>. L'annulation prend effet à la fin de la période de facturation en cours; vous conservez l'accès jusqu'à cette date.</p>
 
   <h2>6. Utilisation acceptable</h2>
-  <p>Vous vous engagez à utiliser Ordo uniquement pour la gestion de votre restaurant ou de vos établissements de restauration. Il est interdit de :</p>
+  <p>Vous vous engagez à utiliser Ordo uniquement pour la gestion de votre restaurant ou de vos établissements de restauration. Il est interdit :</p>
   <ul>
-    <li>Revendre, louer ou sous-licencier l'accès à Ordo à des tiers</li>
-    <li>Tenter de décompiler, désassembler ou pirater le service</li>
-    <li>Utiliser des bots ou scripts automatisés non autorisés</li>
-    <li>Importer des données illicites ou portant atteinte aux droits de tiers</li>
-    <li>Utiliser le service à des fins frauduleuses ou contraires aux lois applicables</li>
-    <li>Partager vos identifiants avec des tiers non autorisés</li>
+    <li>de revendre, louer ou sous-licencier l'accès à Ordo;</li>
+    <li>de tenter de décompiler, désassembler ou pirater le service;</li>
+    <li>d'utiliser des robots ou des scripts automatisés non autorisés;</li>
+    <li>d'importer des données illicites ou qui portent atteinte aux droits de tiers;</li>
+    <li>d'utiliser le service à des fins frauduleuses ou contraires aux lois;</li>
+    <li>de partager vos identifiants avec des personnes non autorisées.</li>
   </ul>
 
   <h2>7. Propriété intellectuelle</h2>
-  <p>Selmo Tech et Ordo sont des marques de Selmo Tech Inc. Le code source, les algorithmes, les interfaces et tous les éléments du service sont la propriété exclusive de Selmo Tech Inc. et protégés par les lois canadiennes sur le droit d'auteur.</p>
-  <p>Vous conservez la propriété de toutes vos données opérationnelles (inventaires, fiches techniques, données de ventes). Selmo Tech n'acquiert aucun droit sur vos données d'affaires.</p>
+  <p>Ordo et Selmo Tech sont des noms utilisés par Selmo Tech. Le code source, les algorithmes, les interfaces et tous les éléments du service sont la propriété exclusive de Selmo Tech et sont protégés par les lois canadiennes sur le droit d'auteur.</p>
+  <p>Vous restez propriétaire de toutes vos données d'exploitation (inventaires, fiches techniques, ventes). Selmo Tech n'acquiert aucun droit sur vos données d'affaires.</p>
 
   <h2>8. Disponibilité du service</h2>
-  <p>Selmo Tech s'efforce de maintenir Ordo disponible 24h/24, 7j/7. Cependant, nous ne garantissons pas une disponibilité ininterrompue. Des maintenances planifiées seront annoncées avec un préavis raisonnable. En cas de panne prolongée (supérieure à 48 heures consécutives), un crédit proportionnel peut être accordé sur demande.</p>
+  <p>Selmo Tech s'efforce de garder Ordo disponible en tout temps, sans garantir une disponibilité ininterrompue. Les maintenances planifiées sont annoncées avec un préavis raisonnable. En cas de panne prolongée (plus de 48 heures consécutives), un crédit proportionnel peut être accordé sur demande.</p>
 
-  <h2>9. Intelligence artificielle — Limitations</h2>
-  <div class="highlight-box">
-    <p><strong>Important :</strong> Les analyses et recommandations générées par Ordo IA sont fournies à titre informatif uniquement. Elles ne constituent pas des conseils financiers, comptables ou juridiques professionnels. Selmo Tech décline toute responsabilité pour les décisions d'affaires prises sur la base des analyses d'Ordo IA.</p>
+  <h2>9. Intelligence artificielle : limites</h2>
+  <div class="resume">
+    <p><strong>Important :</strong> les analyses et recommandations d'Ordo IA sont fournies à titre informatif seulement. Elles ne constituent pas des conseils financiers, comptables ou juridiques. Selmo Tech n'est pas responsable des décisions d'affaires prises sur la base de ces analyses.</p>
   </div>
-  <p>L'exactitude des analyses dépend de la qualité et de l'exhaustivité des données saisies par l'utilisateur. Selmo Tech n'est pas responsable des analyses erronées résultant de données incorrectes ou incomplètes.</p>
+  <p>L'exactitude des analyses dépend de la qualité et de l'exhaustivité des données que vous saisissez. Selmo Tech n'est pas responsable des analyses erronées qui découlent de données incorrectes ou incomplètes.</p>
 
   <h2>10. Limitation de responsabilité</h2>
-  <p>Dans les limites permises par la loi québécoise et la <em>Loi sur la protection du consommateur</em> (LPC), la responsabilité totale de Selmo Tech envers un Client est limitée au montant payé par ce Client au cours des 3 derniers mois précédant le fait générateur.</p>
-  <p>Selmo Tech ne saurait être tenue responsable de pertes indirectes, de manque à gagner, ou de pertes de données résultant de l'utilisation ou de l'impossibilité d'utiliser le service.</p>
+  <p>Dans les limites permises par la loi québécoise et la <em>Loi sur la protection du consommateur</em>, la responsabilité totale de Selmo Tech envers un Client est limitée au montant payé par ce Client au cours des 3 mois précédant le fait générateur.</p>
+  <p>Selmo Tech n'est pas responsable des pertes indirectes, du manque à gagner ou des pertes de données découlant de l'utilisation ou de l'impossibilité d'utiliser le service.</p>
 
   <h2>11. Suspension et résiliation</h2>
-  <p>Selmo Tech se réserve le droit de suspendre ou résilier un compte en cas de :</p>
+  <p>Selmo Tech peut suspendre ou résilier un compte en cas :</p>
   <ul>
-    <li>Non-paiement après 14 jours de retard</li>
-    <li>Violation des conditions d'utilisation</li>
-    <li>Activité frauduleuse ou abusive</li>
+    <li>de non-paiement après 14 jours de retard;</li>
+    <li>de violation des présentes conditions;</li>
+    <li>d'activité frauduleuse ou abusive.</li>
   </ul>
-  <p>En cas de résiliation pour violation, aucun remboursement n'est dû. En cas de résiliation à votre initiative, les conditions de remboursement décrites dans la Politique de remboursement s'appliquent.</p>
+  <p>En cas de résiliation pour violation, aucun remboursement n'est dû. Si vous résiliez vous-même, la politique de remboursement s'applique.</p>
 
   <h2>12. Modification des conditions</h2>
-  <p>Selmo Tech peut modifier ces conditions avec un préavis de 30 jours par courriel. Si vous n'acceptez pas les modifications, vous pouvez résilier votre abonnement avant leur entrée en vigueur et obtenir un remboursement prorata.</p>
+  <p>Selmo Tech peut modifier ces conditions avec un préavis de 30 jours par courriel. Si vous refusez les modifications, vous pouvez résilier votre abonnement avant leur entrée en vigueur et obtenir un remboursement au prorata.</p>
 
-  <h2>13. Droit applicable et juridiction</h2>
-  <p>Les présentes conditions sont régies par les lois de la province de Québec et les lois fédérales canadiennes applicables. Tout litige sera soumis à la compétence exclusive des tribunaux du district de Québec, au Québec, Canada.</p>
-  <p>Conformément à la <em>Loi sur la protection du consommateur</em> du Québec, les consommateurs québécois conservent tous leurs droits légaux, nonobstant toute clause contraire dans les présentes conditions.</p>
+  <h2>13. Droit applicable</h2>
+  <p>Les présentes conditions sont régies par les lois du Québec et les lois fédérales du Canada qui s'y appliquent. Tout litige relève des tribunaux du district judiciaire de Québec.</p>
+  <p>Conformément à la <em>Loi sur la protection du consommateur</em>, les consommateurs québécois conservent tous les droits que la loi leur accorde, malgré toute clause contraire.</p>
 
   <h2>14. Contact</h2>
-  <div class="contact-box">
-    <p><strong>Selmo Tech Inc.</strong></p>
+  <div class="coordonnees">
+    <p><strong>Selmo Tech</strong></p>
     <p>Québec, Canada</p>
-    <p>Courriel : <strong>support@selmotech.com</strong></p>
-    <p>Site : <strong>selmotech.ca</strong></p>
+    <p>Courriel : <span class="courriel">contact@selmotech.ca</span></p>
   </div>
-</div>
-</div>
+</article>
 
 <!-- POLITIQUE DE REMBOURSEMENT -->
-<div id="remboursement" class="doc">
-<div class="container">
-  <div class="doc-header">
-    <div class="doc-badge">LPC Québec · Protection du consommateur</div>
+<article class="doc wrap" id="remboursement" hidden>
+  <div class="doc-tete">
+    <p class="doc-cadre">Loi sur la protection du consommateur (Québec)</p>
     <h1>Politique de remboursement</h1>
-    <p class="doc-meta">Selmo Tech Inc. · Dernière mise à jour : 17 avril 2026 · Version 1.0</p>
+    <p class="doc-meta">Selmo Tech. Dernière mise à jour : 26 octobre 2026, version 1.2.</p>
   </div>
 
-  <div class="highlight-box">
-    <p><strong>Notre engagement :</strong> Si Ordo ne vous convient pas, nous vous remboursons. Nous croyons en notre produit — vous ne prenez aucun risque financier pendant les 14 premiers jours.</p>
+  <div class="resume">
+    <p><strong>Notre engagement :</strong> si Ordo ne vous convient pas, nous vous remboursons. Pendant les 14 jours d'essai, vous ne payez rien.</p>
   </div>
 
-  <h2>1. Essai gratuit — Aucun remboursement requis</h2>
-  <p>Tout nouveau compte bénéficie d'un <strong>essai gratuit de 14 jours</strong>, sans carte de crédit et sans engagement. Aucun montant n'est débité pendant cette période. Si vous n'êtes pas satisfait, vous n'avez aucune démarche à effectuer — votre compte expire simplement.</p>
+  <h2>1. Essai gratuit</h2>
+  <p>Tout nouveau compte bénéficie d'un <strong>essai gratuit de 14 jours</strong>, sans carte de crédit et sans engagement. Aucun montant n'est prélevé pendant cette période. Si Ordo ne vous convient pas, vous n'avez rien à faire : l'essai prend fin de lui-même.</p>
 
-  <h2>2. Garantie de satisfaction — 30 jours</h2>
-  <p>Après votre premier paiement, si vous n'êtes pas satisfait d'Ordo pour quelque raison que ce soit, nous vous remboursons intégralement dans les <strong>30 jours suivant votre premier paiement</strong>.</p>
+  <h2>2. Garantie de satisfaction de 30 jours</h2>
+  <p>Après votre premier paiement, si vous n'êtes pas satisfait d'Ordo, pour quelque raison que ce soit, nous vous remboursons entièrement dans les <strong>30 jours suivant ce premier paiement</strong> :</p>
   <ul>
-    <li>Aucune question posée</li>
-    <li>Remboursement complet du premier mois</li>
-    <li>Délai de traitement : 5 à 10 jours ouvrables</li>
-    <li>Remboursement sur le mode de paiement original</li>
+    <li>sans avoir à vous justifier;</li>
+    <li>remboursement complet du premier mois;</li>
+    <li>délai de traitement de 5 à 10 jours ouvrables;</li>
+    <li>remboursement sur le mode de paiement d'origine.</li>
   </ul>
-  <p>Pour demander un remboursement dans le cadre de cette garantie, contactez-nous à <strong>support@selmotech.com</strong> en indiquant votre adresse courriel de compte et la mention « Garantie 30 jours ».</p>
+  <p>Pour en faire la demande, écrivez à <span class="courriel">contact@selmotech.ca</span> en indiquant l'adresse courriel de votre compte et la mention « Garantie 30 jours ».</p>
 
   <h2>3. Annulation en cours d'abonnement</h2>
-  <p>Vous pouvez annuler votre abonnement à tout moment. Voici les règles applicables :</p>
-  <table>
-    <tr><th>Situation</th><th>Remboursement</th></tr>
-    <tr><td>Annulation dans les 30 jours du premier paiement</td><td>Remboursement complet</td></tr>
-    <tr><td>Annulation après 30 jours (renouvellements subséquents)</td><td>Aucun remboursement — accès maintenu jusqu'à la fin de la période payée</td></tr>
-    <tr><td>Panne de service ≥ 48h consécutives causée par Selmo Tech</td><td>Crédit prorata sur demande</td></tr>
-    <tr><td>Modification substantielle des conditions (hausse de prix, suppression de fonctionnalité majeure)</td><td>Remboursement prorata si annulation dans les 30 jours de la notification</td></tr>
-    <tr><td>Résiliation pour violation des conditions d'utilisation</td><td>Aucun remboursement</td></tr>
-  </table>
+  <div class="table-zone">
+    <table>
+      <tr><th>Situation</th><th>Remboursement</th></tr>
+      <tr><td>Annulation dans les 30 jours suivant le premier paiement</td><td>Remboursement complet</td></tr>
+      <tr><td>Annulation après 30 jours (renouvellements suivants)</td><td>Aucun remboursement; l'accès est maintenu jusqu'à la fin de la période payée</td></tr>
+      <tr><td>Panne de 48 heures consécutives ou plus causée par Selmo Tech</td><td>Crédit au prorata, sur demande</td></tr>
+      <tr><td>Modification importante des conditions (hausse de prix, retrait d'une fonctionnalité majeure)</td><td>Remboursement au prorata si vous annulez dans les 30 jours suivant l'avis</td></tr>
+      <tr><td>Résiliation pour violation des conditions d'utilisation</td><td>Aucun remboursement</td></tr>
+    </table>
+  </div>
 
   <h2>4. Droits des consommateurs québécois</h2>
-  <p>Conformément à la <em>Loi sur la protection du consommateur</em> (LPC) du Québec et à ses règlements d'application, les consommateurs québécois bénéficient de droits supplémentaires :</p>
+  <p>Conformément à la <em>Loi sur la protection du consommateur</em> du Québec, les consommateurs québécois bénéficient notamment :</p>
   <ul>
-    <li><strong>Contrats à exécution successive :</strong> vous pouvez résilier un contrat d'abonnement à tout moment moyennant un préavis raisonnable, conformément à l'article 190.1 LPC.</li>
-    <li><strong>Résolution pour vice caché :</strong> si le service présente un défaut grave qui n'était pas apparent et qui n'aurait pas conduit à la conclusion du contrat, vous avez droit à la résolution du contrat et au remboursement intégral.</li>
-    <li><strong>Garantie légale :</strong> Selmo Tech garantit qu'Ordo est conforme à sa description et apte à l'usage auquel il est destiné, conformément aux articles 37 et suivants de la LPC.</li>
+    <li>du droit de résilier en tout temps un contrat de service à exécution successive, selon les règles prévues par la loi;</li>
+    <li>de la garantie que le service est conforme à sa description et apte à l'usage auquel il est destiné (articles 37 et suivants);</li>
+    <li>des recours prévus par la loi en cas de défaut du service.</li>
   </ul>
 
-  <h2>5. Procédure de remboursement</h2>
+  <h2>5. Comment demander un remboursement</h2>
   <ol>
-    <li>Envoyez un courriel à <strong>support@selmotech.com</strong></li>
-    <li>Indiquez votre adresse courriel de compte et le motif de votre demande</li>
-    <li>Nous accusons réception dans les 24 heures</li>
-    <li>Le remboursement est traité dans les 5 à 10 jours ouvrables</li>
-    <li>Le remboursement apparaît sur votre relevé de carte de crédit sous « SELMO TECH »</li>
+    <li>Écrivez à <span class="courriel">contact@selmotech.ca</span>.</li>
+    <li>Indiquez l'adresse courriel de votre compte et le motif de votre demande.</li>
+    <li>Nous accusons réception dans les 24 heures ouvrables.</li>
+    <li>Le remboursement est traité dans un délai de 5 à 10 jours ouvrables.</li>
   </ol>
 
-  <h2>6. Litiges et recours</h2>
-  <p>Si votre demande de remboursement est refusée et que vous estimez y avoir droit, vous pouvez :</p>
+  <h2>6. Recours</h2>
+  <p>Si votre demande est refusée et que vous estimez y avoir droit, vous pouvez :</p>
   <ul>
-    <li>Contacter l'<strong>Office de la protection du consommateur (OPC)</strong> du Québec : <strong>opc.gouv.qc.ca</strong> — 1-888-672-2556</li>
-    <li>Déposer une plainte auprès du <strong>Bureau de la concurrence Canada</strong> : <strong>bureaudelaconcurrence.gc.ca</strong></li>
-    <li>Initier une procédure aux <strong>Petites créances</strong> du Québec pour les montants inférieurs à 15 000 $</li>
-    <li>Initier un litige via votre émetteur de carte de crédit (rétrofacturation)</li>
+    <li>communiquer avec l'Office de la protection du consommateur du Québec (opc.gouv.qc.ca, 1 888 672-2556);</li>
+    <li>vous adresser à la Division des petites créances de la Cour du Québec pour les montants de 15 000 $ ou moins;</li>
+    <li>demander une rétrofacturation à l'émetteur de votre carte de crédit.</li>
   </ul>
 
   <h2>7. Contact</h2>
-  <div class="contact-box">
-    <p><strong>Pour toute demande de remboursement :</strong></p>
-    <p>Courriel : <strong>support@selmotech.com</strong></p>
-    <p>Délai de réponse : 24 heures ouvrables</p>
-    <p>Délai de traitement du remboursement : 5 à 10 jours ouvrables</p>
+  <div class="coordonnees">
+    <p><strong>Demandes de remboursement</strong></p>
+    <p>Courriel : <span class="courriel">contact@selmotech.ca</span></p>
+    <p>Accusé de réception : 24 heures ouvrables</p>
+    <p>Traitement du remboursement : 5 à 10 jours ouvrables</p>
   </div>
-</div>
-</div>
+</article>
 
-<footer>
-  <p>© 2026 Selmo Tech Inc. · Québec, Canada · <a href="https://selmotech.ca">selmotech.ca</a></p>
-  <p style="margin-top:8px;">Ces documents sont conformes à la Loi 25 (Québec), à la LPRPDE (Canada) et à la Loi sur la protection du consommateur du Québec.</p>
+</main>
+
+<footer class="pied">
+  <div class="wrap">
+    <p>© 2026 Selmo Tech. Québec, Canada. <a href="/">selmotech.ca</a></p>
+    <p>Ces documents ont été rédigés en tenant compte de la Loi 25 (Québec), de la LPRPDE (Canada) et de la Loi sur la protection du consommateur du Québec.</p>
+  </div>
 </footer>
 
 <script>
-  function showDoc(id, link) {
-    document.querySelectorAll('.doc').forEach(d => d.classList.remove('active'));
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if (link) link.classList.add('active');
-    window.scrollTo(0, 0);
-    return false;
+(function () {
+  "use strict";
+  var DOCS = ["confidentialite", "conditions", "remboursement"];
+  function afficher(id, defiler) {
+    if (DOCS.indexOf(id) === -1) id = "confidentialite";
+    DOCS.forEach(function (d) { document.getElementById(d).hidden = d !== id; });
+    document.querySelectorAll(".onglets a").forEach(function (a) {
+      if (a.getAttribute("data-doc") === id) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    if (defiler) window.scrollTo(0, 0);
   }
-
-  // Support navigation par hash (#conditions, #remboursement, #confidentialite)
-  const validDocs = ['confidentialite', 'conditions', 'remboursement'];
-  const hash = window.location.hash.replace('#', '');
-  if (validDocs.includes(hash)) {
-    showDoc(hash, document.querySelector('.nav-links a[onclick*="' + hash + '"]'));
-  }
+  document.querySelectorAll(".onglets a").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      e.preventDefault();
+      var id = a.getAttribute("data-doc");
+      try { history.replaceState(null, "", "#" + id); } catch (err) {}
+      afficher(id, true);
+    });
+  });
+  window.addEventListener("hashchange", function () { afficher(window.location.hash.slice(1), true); });
+  afficher(window.location.hash.slice(1), false);
+})();
 </script>
 </body>
 </html>
