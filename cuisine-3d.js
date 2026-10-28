@@ -5,6 +5,7 @@
 // version immobile si l'appareil demande moins d'animation, rien du tout si WebGL manque.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
 const section = document.querySelector('.accroche');
 const canevas = document.getElementById('scene-cuisine');
@@ -167,6 +168,163 @@ function demarrer() {
       g.add(grain);
     });
     return g;
+  }
+
+  // ─── L'atelier : planche, tomate en deux moitiés, couteau, jus ─────────────
+  // Joué une seule fois à l'ouverture, à l'endroit où le bon d'action va tomber.
+  function texturePulpe() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const x = c.getContext('2d');
+    const g = x.createRadialGradient(128, 128, 10, 128, 128, 128);
+    g.addColorStop(0, '#F59A84');
+    g.addColorStop(0.55, '#E3523F');
+    g.addColorStop(0.86, '#C8321F');
+    g.addColorStop(1, '#9E1F16');
+    x.fillStyle = g;
+    x.beginPath();
+    x.arc(128, 128, 128, 0, Math.PI * 2);
+    x.fill();
+    // Quatre loges avec leurs pépins
+    for (let i = 0; i < 4; i++) {
+      const a = (i / 4) * Math.PI * 2 + Math.PI / 4;
+      const cx = 128 + Math.cos(a) * 58;
+      const cy = 128 + Math.sin(a) * 58;
+      x.fillStyle = 'rgba(245, 120, 95, 0.95)';
+      x.beginPath();
+      x.ellipse(cx, cy, 36, 26, a, 0, Math.PI * 2);
+      x.fill();
+      x.fillStyle = '#F3D9A0';
+      for (let s = 0; s < 6; s++) {
+        const b = a + (s - 2.5) * 0.28;
+        x.beginPath();
+        x.ellipse(128 + Math.cos(b) * 58, 128 + Math.sin(b) * 58, 5, 3, b, 0, Math.PI * 2);
+        x.fill();
+      }
+    }
+    // Cœur clair
+    x.fillStyle = 'rgba(250, 190, 170, 0.9)';
+    x.beginPath();
+    x.arc(128, 128, 20, 0, Math.PI * 2);
+    x.fill();
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+
+  function construireAtelier() {
+    const atelier = new THREE.Group();
+    const R = 0.62;
+    const ECRASE = 0.86;
+
+    // Planche à découper (bois clair, chaleureux)
+    const planche = new THREE.Mesh(
+      new RoundedBoxGeometry(3.0, 0.18, 2.0, 4, 0.08),
+      new THREE.MeshStandardMaterial({ color: 0xd6a06a, roughness: 0.75 })
+    );
+    planche.position.y = -0.09;
+    atelier.add(planche);
+    const rainure = new THREE.Mesh(
+      new THREE.TorusGeometry(0.88, 0.018, 6, 48),
+      new THREE.MeshStandardMaterial({ color: 0xb98450, roughness: 0.8 })
+    );
+    rainure.rotation.x = Math.PI / 2;
+    rainure.scale.set(1.45, 0.9, 1);
+    rainure.position.y = 0.005;
+    atelier.add(rainure);
+
+    // Tomate : deux moitiés lisses et brillantes, la face coupée porte la pulpe
+    const peau = new THREE.MeshPhysicalMaterial({ color: 0xc62a1f, roughness: 0.28, clearcoat: 0.7, clearcoatRoughness: 0.2 });
+    const pulpe = new THREE.MeshStandardMaterial({ map: texturePulpe(), roughness: 0.45 });
+    const moitie = cote => {
+      const charniere = new THREE.Group(); // pivot au bas de la coupe
+      charniere.position.set(0, 0, 0);
+      const corps = new THREE.Group();
+      corps.position.y = R * ECRASE;
+      corps.scale.y = ECRASE;
+      const sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(R, 48, 32, cote < 0 ? -Math.PI / 2 : Math.PI / 2, Math.PI),
+        peau
+      );
+      const face = new THREE.Mesh(new THREE.CircleGeometry(R * 0.995, 48), pulpe);
+      face.rotation.y = cote < 0 ? Math.PI / 2 : -Math.PI / 2;
+      corps.add(sphere, face);
+      charniere.add(corps);
+      return charniere;
+    };
+    const gauche = moitie(-1);
+    const droite = moitie(1);
+    atelier.add(gauche, droite);
+    // Collerette verte sur la moitié gauche
+    for (let i = 0; i < 5; i++) {
+      const sepale = new THREE.Mesh(new THREE.ConeGeometry(0.06, 0.38, 4), mat(C.sauge));
+      const a = (i / 5) * Math.PI * 2;
+      sepale.position.set(Math.cos(a) * 0.12 - 0.02, R * ECRASE * 2 - 0.02, Math.sin(a) * 0.12);
+      sepale.rotation.set(Math.sin(a) * 1.25, 0, -Math.cos(a) * 1.25);
+      gauche.add(sepale);
+    }
+
+    // Jus : une flaque qui s'étale et quelques gouttes
+    const flaque = new THREE.Mesh(
+      new THREE.CircleGeometry(0.75, 32),
+      new THREE.MeshStandardMaterial({ color: C.rouge, roughness: 0.15, transparent: true, opacity: 0.88 })
+    );
+    flaque.rotation.x = -Math.PI / 2;
+    flaque.position.y = 0.006;
+    flaque.scale.set(0.001, 0.001, 1);
+    atelier.add(flaque);
+    const gouttes = [];
+    const matGoutte = new THREE.MeshStandardMaterial({ color: 0xd8382a, roughness: 0.2 });
+    for (let i = 0; i < 14; i++) {
+      const g = new THREE.Mesh(new THREE.SphereGeometry(0.045 + Math.random() * 0.04, 10, 8), matGoutte);
+      g.visible = false;
+      const a = Math.random() * Math.PI * 2;
+      g.userData.v = new THREE.Vector3(Math.cos(a) * (0.8 + Math.random()), 1.6 + Math.random() * 1.6, Math.sin(a) * (0.8 + Math.random()));
+      g.userData.vit = g.userData.v.clone();
+      atelier.add(g);
+      gouttes.push(g);
+    }
+
+    // Couteau de chef : lame inox, manche cuivre (la couleur du site), trois rivets
+    const couteau = new THREE.Group();
+    const forme = new THREE.Shape();
+    forme.moveTo(0, 0);
+    forme.lineTo(2.1, 0);
+    forme.quadraticCurveTo(2.65, 0.06, 2.85, 0.5);
+    forme.lineTo(0, 0.56);
+    forme.closePath();
+    const lame = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(forme, { depth: 0.025, bevelEnabled: true, bevelThickness: 0.012, bevelSize: 0.012, bevelSegments: 2 }),
+      new THREE.MeshStandardMaterial({ color: 0xd9dfdd, metalness: 0.7, roughness: 0.22, envMapIntensity: 1.6 })
+    );
+    lame.position.z = -0.0125;
+    couteau.add(lame);
+    const manche = new THREE.Mesh(
+      new RoundedBoxGeometry(1.15, 0.36, 0.2, 3, 0.07),
+      new THREE.MeshStandardMaterial({ color: C.cuivre, roughness: 0.45, metalness: 0.15 })
+    );
+    manche.position.set(-0.6, 0.3, 0);
+    couteau.add(manche);
+    for (let i = 0; i < 3; i++) {
+      const rivet = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.035, 0.035, 0.22, 10),
+        new THREE.MeshStandardMaterial({ color: 0xe4e8e6, metalness: 1, roughness: 0.2 })
+      );
+      rivet.rotation.x = Math.PI / 2;
+      rivet.position.set(-0.95 + i * 0.32, 0.3, 0);
+      couteau.add(rivet);
+    }
+    // La lame est dans le plan de coupe (x = 0) : on la tourne pour qu'elle coupe la tomate en deux
+    const porteCouteau = new THREE.Group();
+    couteau.rotation.y = Math.PI / 2;
+    couteau.position.z = 1.35; // le milieu du tranchant passe au centre de la tomate
+    porteCouteau.add(couteau);
+    atelier.add(porteCouteau);
+
+    // Vue de trois quarts, un peu plongeante : on voit la lame et la coupe
+    atelier.rotation.set(0.42, -0.85, 0);
+    atelier.visible = false;
+    return { atelier, gauche, droite, flaque, gouttes, porteCouteau, R, ECRASE };
   }
 
   // ─── Fiches techniques (papier thermique, comme les bons du site) ──────────
@@ -364,9 +522,13 @@ function demarrer() {
       echelle: 0,
       survol: 0,
       base: new THREE.Vector3(),
+      depart: new THREE.Vector3(),
       visible: true,
     };
   });
+
+  const A = construireAtelier();
+  monde.add(A.atelier);
 
   function placer() {
     const w = section.clientWidth;
@@ -400,6 +562,25 @@ function demarrer() {
       const pixelsParUnite = h / hauteur;
       o.tailleFinale = (o.taille * pixelsVises) / pixelsParUnite;
     });
+
+    // L'atelier se pose exactement là où le bon d'action va tomber
+    const rail = document.querySelector('.zone-rail');
+    if (rail) {
+      const rs = section.getBoundingClientRect();
+      const rr = rail.getBoundingClientRect();
+      const z = 1.5;
+      const distance = camera.position.z - z;
+      const hauteur = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * distance;
+      const largeur = hauteur * camera.aspect;
+      const px = rr.left - rs.left + rr.width / 2;
+      const py = rr.top - rs.top + Math.min(rr.height, h) * 0.42;
+      A.atelier.position.set(((2 * px) / w - 1) * (largeur / 2), (1 - (2 * py) / h) * (hauteur / 2), z);
+      const pixelsParUnite = h / hauteur;
+      A.echelle = Math.min(rr.width * 0.78, 400) / (3.0 * pixelsParUnite);
+      objets.forEach((o, i) => {
+        o.depart.copy(A.atelier.position).add(new THREE.Vector3(Math.sin(i * 2.1) * 0.3, 0.4, 0));
+      });
+    }
   }
 
   // ─── Interaction : souris, défilement, survol ──────────────────────────────
@@ -426,6 +607,84 @@ function demarrer() {
   const horloge = new THREE.Clock();
   let actif = true;
   let debut = null;
+  let precedent = null;
+
+  // L'intro ne joue que si la page l'a préparée (grand écran, haut de page, 1re visite de la session)
+  // et si la 3D est prête assez vite ; sinon le bon d'action s'affiche normalement.
+  const racine = document.documentElement;
+  let intro = racine.classList.contains('intro-3d') && performance.now() < 2200 && !reduire;
+  if (!intro) racine.classList.remove('intro-3d');
+  let introFinie = !intro;
+  function terminerIntro() {
+    if (introFinie) return;
+    introFinie = true;
+    racine.classList.remove('intro-3d');
+    racine.classList.add('intro-finie');
+    try { sessionStorage.setItem('ordo-intro', '1'); } catch (e) { /* stockage indisponible : sans effet */ }
+  }
+
+  // Courbes
+  const borne = (v, a, b) => Math.min(1, Math.max(0, (v - a) / (b - a)));
+  const sortie = x => 1 - Math.pow(1 - x, 3);
+  const entree = x => x * x * x;
+  const rebond = x => (x === 0 ? 0 : 1 + 2.2 * Math.pow(x - 1, 3) + 1.2 * Math.pow(x - 1, 2));
+  const COUPE = 1.0; // instant où la lame touche la planche
+  const GERBE = 1.0; // les aliments jaillissent
+  const FIN = 1.75; // le bon d'action tombe
+
+  function animerAtelier(T, dt) {
+    const a = A.atelier;
+    if (!intro || T > FIN + 0.6) {
+      a.visible = false;
+      return;
+    }
+    a.visible = true;
+    // Entrée de la planche et de la tomate, puis sortie vers le fond
+    const arrive = rebond(borne(T, 0, 0.5));
+    const part = entree(borne(T, FIN - 0.15, FIN + 0.45));
+    a.scale.setScalar(A.echelle * arrive * (1 - part));
+    a.rotation.y = -0.85 + part * 0.6;
+
+    // Couteau : arrive au-dessus, tranche d'un coup sec, repart
+    const c = A.porteCouteau;
+    const haut = 1.75;
+    let y;
+    if (T < 0.8) y = 3.4 - (3.4 - haut) * sortie(borne(T, 0.3, 0.8));
+    else if (T < COUPE) y = haut - (haut - 0.02) * entree(borne(T, 0.8, COUPE));
+    else y = 0.02 + 3.0 * entree(borne(T, COUPE + 0.08, COUPE + 0.55));
+    c.position.set(0, y, 0);
+    c.visible = T > 0.3 && T < COUPE + 0.55;
+    c.rotation.x = T < COUPE ? 0 : -0.5 * borne(T, COUPE + 0.08, COUPE + 0.55);
+
+    // Les deux moitiés s'ouvrent
+    const ouvre = rebond(borne(T, COUPE - 0.02, COUPE + 0.45));
+    A.gauche.rotation.z = 0.55 * ouvre;
+    A.gauche.position.x = -0.22 * ouvre;
+    A.droite.rotation.z = -0.55 * ouvre;
+    A.droite.position.x = 0.22 * ouvre;
+
+    // Jus : la flaque s'étale, les gouttes giclent puis retombent sur la planche
+    const f = sortie(borne(T, COUPE, COUPE + 0.5));
+    A.flaque.scale.set(f * 1.1, f * 0.75, 1);
+    A.gouttes.forEach(g => {
+      if (T < COUPE) {
+        g.visible = false;
+        g.position.set(0, A.R * A.ECRASE, 0);
+        g.userData.vit = g.userData.v.clone();
+        return;
+      }
+      g.visible = T < COUPE + 0.9;
+      const v = g.userData.vit;
+      v.y -= 9 * dt;
+      g.position.addScaledVector(v, dt);
+      if (g.position.y < 0.03) {
+        g.position.y = 0.03;
+        v.set(0, 0, 0);
+      }
+    });
+
+    if (T >= FIN) terminerIntro();
+  }
 
   function rendre() {
     renderer.render(scene, camera);
@@ -437,6 +696,9 @@ function demarrer() {
     const t = horloge.getElapsedTime();
     if (debut === null) debut = t;
     const depuis = t - debut;
+    const dt = precedent === null ? 0 : Math.min(0.05, t - precedent);
+    precedent = t;
+    animerAtelier(depuis, dt);
 
     souris.lerp(sourisCible, 0.05);
     camera.position.x = souris.x * 0.9;
@@ -456,16 +718,24 @@ function demarrer() {
 
     objets.forEach((o, i) => {
       if (!o.visible) return;
-      // Entrée : chaque objet arrive en ressort, décalé de 70 ms
-      const p = Math.min(1, Math.max(0, (depuis - i * 0.07) / 0.9));
-      const ressort = p === 0 ? 0 : 1 + 2.2 * Math.pow(p - 1, 3) + 1.2 * Math.pow(p - 1, 2);
       o.survol += ((o === survole ? 1 : 0) - o.survol) * 0.12;
-      o.pivot.scale.setScalar(o.tailleFinale * ressort * (1 + 0.12 * o.survol));
-
       const flotte = Math.sin(t * 0.8 + o.phase) * 0.18;
-      o.pivot.position.set(o.base.x, o.base.y + flotte, o.base.z - (1 - p) * 3);
+      if (intro) {
+        // Gerbe : chaque aliment jaillit de la planche et file vers sa place, en arc
+        const p = borne(depuis, GERBE + i * 0.05, GERBE + i * 0.05 + 0.85);
+        const e = sortie(p);
+        o.pivot.scale.setScalar(o.tailleFinale * (p === 0 ? 0 : 0.35 + 0.65 * rebond(p)) * (1 + 0.12 * o.survol));
+        o.pivot.position.lerpVectors(o.depart, o.base, e);
+        o.pivot.position.y += Math.sin(Math.PI * e) * 1.6 + flotte * e;
+      } else {
+        // Entrée simple : chaque objet arrive en ressort, décalé de 70 ms
+        const p = borne(depuis, i * 0.07, i * 0.07 + 0.9);
+        o.pivot.scale.setScalar(o.tailleFinale * rebond(p) * (1 + 0.12 * o.survol));
+        o.pivot.position.set(o.base.x, o.base.y + flotte, o.base.z - (1 - p) * 3);
+      }
 
-      const tour = t * o.vitesse * (1 + 2.5 * o.survol);
+      const vrille = intro ? 3 * (1 - borne(depuis, GERBE + i * 0.05, GERBE + i * 0.05 + 0.85)) : 0;
+      const tour = t * o.vitesse * (1 + 2.5 * o.survol) + vrille;
       if (o.fiche) {
         o.corps.rotation.set(Math.sin(t * 0.5 + o.phase) * 0.15, tour, Math.sin(t * 0.3 + o.phase) * 0.08);
       } else {
@@ -500,6 +770,7 @@ function demarrer() {
       image();
     } else if (!doit) {
       actif = false;
+      terminerIntro();
     }
   }
   new IntersectionObserver(([e]) => {
@@ -525,6 +796,7 @@ function demarrer() {
       actif = false;
       poseFixe();
     } else {
+      if (intro) setTimeout(terminerIntro, 3000); // filet de sécurité
       image();
     }
   });

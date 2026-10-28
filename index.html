@@ -201,7 +201,21 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- Rail du passe et bons ---------- */
 .passe { margin: 0; min-width: 0; perspective: 1200px; }
-.zone-rail { position: relative; max-width: 520px; margin-inline: auto; padding-bottom: 16px; transform-style: preserve-3d; will-change: transform; }
+.zone-rail {
+  position: relative; max-width: 520px; margin-inline: auto; padding-bottom: 16px;
+  transform-style: preserve-3d; will-change: transform;
+  transition: opacity .35s ease-out, translate .55s cubic-bezier(.22, 1, .36, 1);
+}
+/* Intro 3D : le bon attend que la tomate soit tranchée, puis tombe sur le rail */
+.intro-3d .zone-rail { opacity: 0; translate: 0 -48px; }
+.intro-finie .bon-principal { animation: balancement-bis 2.2s cubic-bezier(.25, .8, .3, 1) both; }
+@keyframes balancement-bis {
+  0%   { transform: rotate(4deg); }
+  30%  { transform: rotate(-2.2deg); }
+  55%  { transform: rotate(1deg); }
+  78%  { transform: rotate(-0.4deg); }
+  100% { transform: rotate(0deg); }
+}
 .rail {
   position: relative; z-index: 4;
   height: 16px; border-radius: 8px;
@@ -464,6 +478,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .pied-courriel { user-select: all; color: var(--sur-ardoise); font-size: 15px; }
 .pied-bas { margin-top: 44px; padding-top: 22px; border-top: 1px solid var(--ardoise-2); font-size: 14px; }
 </style>
+<script>
+/* Prépare l'intro 3D (planche, couteau, tomate) : seulement sur grand écran, en haut de page,
+   à la 1re visite de la session, sans « mouvement réduit ». Filet : le bon réapparaît après 4,5 s. */
+(function () {
+  try {
+    var d = document.documentElement;
+    if (window.innerWidth >= 960 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && !sessionStorage.getItem('ordo-intro')) {
+      d.classList.add('intro-3d');
+      setTimeout(function () { d.classList.remove('intro-3d'); }, 4500);
+    }
+  } catch (e) {}
+})();
+</script>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
