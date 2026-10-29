@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Ordo par Selmo Tech</title>
-<meta name="description" content="Ordo rassemble tes factures, tes fiches techniques, ton inventaire et tes ventes. Il te montre en dollars où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 14 jours.">
+<meta name="description" content="Ordo rassemble tes factures, tes fiches techniques, ton inventaire et tes ventes. Il te montre en dollars où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 30 jours.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.selmotech.ca/">
 <meta property="og:title" content="Ordo par Selmo Tech">
-<meta property="og:description" content="Trouve où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 14 jours, sans carte de crédit.">
+<meta property="og:description" content="Trouve où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 30 jours, sans carte de crédit.">
 <meta property="og:locale" content="fr_CA">
 <meta name="theme-color" content="#F2F4F2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B8581B'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23FFFDF8' stroke-width='8'/%3E%3C/svg%3E">
@@ -417,6 +417,16 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .plat-inclus li.exclu { color: var(--encre-3); }
 .plat-inclus li.exclu::before { background: var(--ligne-forte); }
 .plat-actions { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+.plat-valeur {
+  margin-top: 18px; padding: 12px 14px; border-left: 3px solid var(--cuivre);
+  background: var(--carrelage); font-size: 16px; font-weight: 600; color: var(--encre);
+}
+.extras { border-top: 1px solid var(--ligne); padding-block: 22px 26px; display: grid; gap: 16px; }
+@media (min-width: 720px) { .extras { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; } }
+.extra { margin: 0; display: flex; flex-direction: column; gap: 4px; font-size: 15.5px; color: var(--encre-2); }
+.extra strong { font-size: 17px; color: var(--encre); }
+.extra-prix { font-weight: 700; color: var(--cuivre-texte); }
+.lien-cuivre { color: var(--cuivre-texte); font-weight: 700; text-underline-offset: 3px; margin-top: 2px; align-self: flex-start; }
 
 /* ---------- Questions ---------- */
 .faq-grille { display: grid; gap: 32px; }
@@ -554,7 +564,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
         <a class="btn btn-plein" href="https://app.selmotech.ca" data-i18n="cta_essai">Essayer Ordo gratuitement</a>
         <a class="btn btn-trait" href="#comment" data-i18n="cta_comment">Voir comment ça marche</a>
       </div>
-      <p class="accroche-note" data-i18n="accroche_note">14 jours gratuits, sans carte de crédit. Pensé pour les restaurants indépendants du Québec.</p>
+      <p class="accroche-note" data-i18n="accroche_note">30 jours gratuits, sans carte de crédit. Pensé pour les restaurants indépendants du Québec.</p>
     </div>
 
     <figure class="passe">
@@ -737,68 +747,45 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 <section class="section" id="tarifs" aria-labelledby="titre-tarifs">
   <div class="wrap">
     <h2 class="titre-section" id="titre-tarifs" data-i18n="tarifs_titre">La carte</h2>
-    <p class="chapeau" data-i18n="tarifs_chapeau">Prix par mois, en dollars canadiens. 14 jours d'essai gratuit, annulable en tout temps.</p>
+    <p class="chapeau" data-i18n="tarifs_chapeau">Un seul forfait, en dollars canadiens. 30 jours d'essai gratuit, sans carte, annulable en tout temps.</p>
 
     <div class="carte">
-      <article class="plat" aria-labelledby="plat-starter">
+      <article class="plat" aria-labelledby="plat-ordo">
         <div class="plat-tete">
-          <h3 class="plat-nom" id="plat-starter">Starter</h3>
-          <span class="pointilles" aria-hidden="true"></span>
-          <p class="plat-prix"><span data-i18n="prix_starter">40 $</span><small data-i18n="par_mois">/ mois</small></p>
-        </div>
-        <p class="plat-desc" data-i18n="starter_desc">Pour démarrer avec l'inventaire et les ventes.</p>
-        <ul class="plat-inclus">
-          <li data-i18n="s_i1">Inventaire d'ouverture et de fermeture</li>
-          <li data-i18n="s_i2">Jusqu'à 5 ingrédients clés et 5 fiches techniques</li>
-          <li data-i18n="s_i3">Import des ventes en CSV</li>
-          <li data-i18n="s_i4">Soutien par courriel</li>
-          <li class="exclu" data-i18n="s_i5">Sans Ordo IA ni factures en photo</li>
-        </ul>
-        <div class="plat-actions">
-          <a class="btn btn-trait btn-petit" href="https://app.selmotech.ca" data-i18n="btn_essai">Commencer l'essai gratuit</a>
-          <a class="btn btn-trait btn-petit" href="https://app.selmotech.ca/?plan=starter" data-i18n="btn_abonner">S'abonner</a>
-        </div>
-      </article>
-
-      <article class="plat" aria-labelledby="plat-pro">
-        <div class="plat-tete">
-          <h3 class="plat-nom" id="plat-pro">Pro</h3>
-          <span class="tampon" data-i18n="tampon">Suggestion du chef</span>
+          <h3 class="plat-nom" id="plat-ordo">Ordo</h3>
+          <span class="tampon" data-i18n="tampon">Prix de lancement</span>
           <span class="pointilles" aria-hidden="true"></span>
           <p class="plat-prix"><span data-i18n="prix_pro">129 $</span><small data-i18n="par_mois">/ mois</small></p>
         </div>
-        <p class="plat-desc" data-i18n="pro_desc">Le plan complet, avec Ordo IA.</p>
+        <p class="plat-desc" data-i18n="pro_desc">Tout Ordo, sans option cachée. Taxes en sus.</p>
         <ul class="plat-inclus">
           <li data-i18n="p_i1">Ingrédients et fiches techniques illimités</li>
-          <li data-i18n="p_i2">Ordo IA, au micro ou au clavier</li>
-          <li data-i18n="p_i3">Factures en photo</li>
-          <li data-i18n="p_i4">Import des ventes en CSV</li>
-          <li data-i18n="p_i5">Soutien rapide</li>
+          <li data-i18n="p_i3">Factures en photo : Ordo les lit pour toi</li>
+          <li data-i18n="p_i2">Ordo IA : pose ta question, reçois la réponse en dollars</li>
+          <li data-i18n="p_i6">Inventaire d'ouverture et de fermeture, pertes avec leur raison</li>
+          <li data-i18n="p_i4">Ventes : fichier de ta caisse, photo du rapport du soir ou saisie</li>
+          <li data-i18n="p_i5">Soutien par courriel, réponse en 1 jour ouvrable</li>
         </ul>
+        <p class="plat-valeur" data-i18n="valeur">Sur 1 M$ de ventes par année, un demi-point de food cost, c'est 5 000 $. Ordo en coûte 1 548 $.</p>
         <div class="plat-actions">
           <a class="btn btn-plein btn-petit" href="https://app.selmotech.ca" data-i18n="btn_essai">Commencer l'essai gratuit</a>
           <a class="btn btn-trait btn-petit" href="https://app.selmotech.ca/?plan=pro" data-i18n="btn_abonner">S'abonner</a>
         </div>
       </article>
 
-      <article class="plat" aria-labelledby="plat-entreprise">
-        <div class="plat-tete">
-          <h3 class="plat-nom" id="plat-entreprise" data-i18n="entreprise_nom">Entreprise</h3>
-          <span class="pointilles" aria-hidden="true"></span>
-          <p class="plat-prix"><span data-i18n="prix_entreprise">349 $</span><small data-i18n="par_mois">/ mois</small></p>
-        </div>
-        <p class="plat-desc" data-i18n="entreprise_desc">Pour les groupes de restaurants.</p>
-        <ul class="plat-inclus">
-          <li data-i18n="e_i1">Tout le plan Pro</li>
-          <li data-i18n="e_i2">Soutien prioritaire</li>
-          <li class="exclu" data-i18n="e_i3">Plusieurs restaurants sur un compte (bientôt)</li>
-          <li class="exclu" data-i18n="e_i4">Tableau de bord consolidé (bientôt)</li>
-          <li class="exclu" data-i18n="e_i5">Accès API (bientôt)</li>
-        </ul>
-        <div class="plat-actions">
-          <a class="btn btn-trait btn-petit" href="#contact" data-i18n="btn_ecrire">Nous écrire</a>
-        </div>
-      </article>
+      <div class="extras">
+        <p class="extra">
+          <strong data-i18n="mer_titre">Mise en route par un chef</strong>
+          <span class="extra-prix" data-i18n="mer_prix">199 $, une fois, facultatif</span>
+          <span class="extra-texte" data-i18n="mer_texte">On entre ensemble tes ingrédients et tes fiches techniques, pour que tes premiers chiffres soient justes dès la première semaine.</span>
+          <a class="lien-cuivre" href="#contact" data-i18n="mer_lien">La demander</a>
+        </p>
+        <p class="extra">
+          <strong data-i18n="multi_titre">Plusieurs restaurants ?</strong>
+          <span class="extra-texte" data-i18n="multi_texte">Écris-nous : on regarde ensemble ce qu'il te faut.</span>
+          <a class="lien-cuivre" href="#contact" data-i18n="btn_ecrire">Nous écrire</a>
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -810,7 +797,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     <div class="faq">
       <details>
         <summary data-i18n="q1">Faut-il une carte de crédit pour l'essai ?</summary>
-        <p class="reponse" data-i18n="r1">Non. Tu crées ton compte et tu as 14 jours pour essayer Ordo. Tu choisis un plan seulement si tu veux continuer.</p>
+        <p class="reponse" data-i18n="r1">Non. Tu crées ton compte et tu as 30 jours pour essayer Ordo, le temps d'un vrai cycle d'inventaire. Tu t'abonnes seulement si tu veux continuer.</p>
       </details>
       <details>
         <summary data-i18n="q2">Est-ce que ça marche avec ma caisse ?</summary>
@@ -841,7 +828,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   <div class="wrap final-grille">
     <div>
       <h2 class="titre-section" id="titre-final" data-i18n="final_titre">Essaie Ordo dans ton propre restaurant.</h2>
-      <p class="chapeau" data-i18n="final_texte">14 jours gratuits, sans carte de crédit. Tu vois tes premiers chiffres dès que tes données sont entrées.</p>
+      <p class="chapeau" data-i18n="final_texte">30 jours gratuits, sans carte de crédit. Tu vois tes premiers chiffres dès que tes données sont entrées.</p>
       <div class="final-actions">
         <a class="btn btn-plein" href="https://app.selmotech.ca" data-i18n="final_btn">Créer mon compte gratuit</a>
       </div>
@@ -934,7 +921,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     accroche_texte: "Ordo brings together your invoices, recipe costs, inventory and sales. It shows you, in dollars, where your restaurant is losing money, and what to do about it this week.",
     cta_essai: "Try Ordo for free",
     cta_comment: "See how it works",
-    accroche_note: "14 days free, no credit card. Built for independent restaurants in Quebec.",
+    accroche_note: "30 days free, no credit card. Built for independent restaurants in Quebec.",
     b2_titre: "FOOD COST",
     b2_periode: "This week",
     b2_valeur: "31.4%",
@@ -1011,37 +998,30 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     v4_titre: "Your data, protected",
     v4_texte: "Database hosted in Canada. Each restaurant only sees its own data.",
     tarifs_titre: "The menu",
-    tarifs_chapeau: "Monthly prices in Canadian dollars. 14-day free trial, cancel anytime.",
-    prix_starter: "$40",
+    tarifs_chapeau: "One plan, in Canadian dollars. 30-day free trial, no credit card, cancel anytime.",
     prix_pro: "$129",
-    prix_entreprise: "$349",
     par_mois: "/ month",
-    starter_desc: "To get started with inventory and sales.",
-    s_i1: "Opening and closing inventory",
-    s_i2: "Up to 5 key ingredients and 5 recipe cards",
-    s_i3: "Sales import (CSV)",
-    s_i4: "Email support",
-    s_i5: "No Ordo AI or invoice photos",
-    tampon: "Chef's pick",
-    pro_desc: "The full plan, with Ordo AI.",
+    tampon: "Launch price",
+    pro_desc: "All of Ordo, no hidden add-ons. Taxes extra.",
     p_i1: "Unlimited ingredients and recipe cards",
-    p_i2: "Ordo AI, by voice or text",
-    p_i3: "Invoice photos",
-    p_i4: "Sales import (CSV)",
-    p_i5: "Fast support",
-    entreprise_nom: "Enterprise",
-    entreprise_desc: "For restaurant groups.",
-    e_i1: "Everything in Pro",
-    e_i2: "Priority support",
-    e_i3: "Several restaurants on one account (coming soon)",
-    e_i4: "Consolidated dashboard (coming soon)",
-    e_i5: "API access (coming soon)",
+    p_i2: "Ordo AI: ask your question, get the answer in dollars",
+    p_i3: "Invoice photos: Ordo reads them for you",
+    p_i4: "Sales: your POS file, a photo of the end-of-night report, or manual entry",
+    p_i5: "Email support, answer within 1 business day",
+    p_i6: "Opening and closing inventory, losses with their reason",
+    valeur: "On $1M in yearly sales, half a point of food cost is $5,000. Ordo costs $1,548.",
+    mer_titre: "Setup by a chef",
+    mer_prix: "$199, one time, optional",
+    mer_texte: "We enter your ingredients and recipe cards together, so your first numbers are right from week one.",
+    mer_lien: "Request it",
+    multi_titre: "Several restaurants?",
+    multi_texte: "Write to us: we'll figure out together what you need.",
     btn_essai: "Start free trial",
     btn_abonner: "Subscribe",
     btn_ecrire: "Contact us",
     faq_titre: "Frequently asked questions",
     q1: "Do I need a credit card for the trial?",
-    r1: "No. Create your account and you have 14 days to try Ordo. You only pick a plan if you want to keep going.",
+    r1: "No. Create your account and you have 30 days to try Ordo, enough for a full inventory cycle. You only subscribe if you want to keep going.",
     q2: "Does it work with my POS?",
     r2: "If your POS can export sales as a CSV file, yes. Otherwise, photograph your end-of-night report or enter sales by hand. Ordo doesn't replace your POS.",
     q3: "How long does it take to get started?",
@@ -1053,7 +1033,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     q6: "Can Ordo AI make mistakes?",
     r6: "Ordo AI answers from the data you enter. The more complete your invoices, inventory and sales are, the more accurate its answers. Double-check important amounts before acting.",
     final_titre: "Try Ordo in your own restaurant.",
-    final_texte: "14 days free, no credit card. You see your first numbers as soon as your data is in.",
+    final_texte: "30 days free, no credit card. You see your first numbers as soon as your data is in.",
     final_btn: "Create my free account",
     form_titre: "Questions? Write to us.",
     form_courriel: "Or by email:",
@@ -1074,7 +1054,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   var MESSAGES = {
     fr: {
       titre: "Ordo par Selmo Tech",
-      description: "Ordo rassemble tes factures, tes fiches techniques, ton inventaire et tes ventes. Il te montre en dollars où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 14 jours.",
+      description: "Ordo rassemble tes factures, tes fiches techniques, ton inventaire et tes ventes. Il te montre en dollars où ton restaurant perd de l'argent, et quoi faire cette semaine. Essai gratuit de 30 jours.",
       bouton_langue: "English",
       envoye: "Message envoyé. On te répond par courriel.",
       erreur: "L'envoi n'a pas fonctionné. Réessaie, ou écris à contact@selmotech.ca.",
@@ -1084,7 +1064,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
     },
     en: {
       titre: "Ordo by Selmo Tech",
-      description: "Ordo brings together your invoices, recipe costs, inventory and sales. It shows you, in dollars, where your restaurant is losing money, and what to do this week. 14-day free trial.",
+      description: "Ordo brings together your invoices, recipe costs, inventory and sales. It shows you, in dollars, where your restaurant is losing money, and what to do this week. 30-day free trial.",
       bouton_langue: "Français",
       envoye: "Message sent. We'll reply by email.",
       erreur: "Sending failed. Try again, or email contact@selmotech.ca.",
